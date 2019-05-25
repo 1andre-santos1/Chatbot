@@ -1,0 +1,14 @@
+a{
+   color: #0691a7;
+   margin:5px 20px;
+   font-size: 20px;
+}
+a:hover{
+    color: white;
+    text-decoration: none;
+}
+.navbar-brand{
+    font-size: 25px;
+    padding-right: 30px;
+    border-right: 1px solid white;
+}
