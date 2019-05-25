@@ -1,16 +1,16 @@
-html {
-    overflow-y: hidden;
-}
 
 .carousel-caption {
     background-color: rgba(0,0,0,0.7);
     border-radius: 20px;
+    
 }
 .carousel-caption > p{
     font-size: 120%;
+    text-shadow: 2px 2px 4px #000000;
 }
 .carousel-caption > h3{
     font-size: 250%;
+    text-shadow: 2px 2px 4px #000000;
 }
 
 .carousel-item {
