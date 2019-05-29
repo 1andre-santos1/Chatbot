@@ -62,8 +62,64 @@ function ListaVagas(){
                                             <li>Conhecimentos funcionais de HR</li>
                                         </ul>
                                         <span>Publicado em: 21/05/2019</span>
-                                        <div class="VagaChatbot">
-                                            <img class="robotIcon" src={require('./RobotIcon.PNG')} />
+                                        <div class="VagaChatbot robotIcon"></div>
+                                        <div class="VagaChatbotQuestion">
+                                            Clica em mim se precisares de ajuda!
+                                        </div>
+                                </Card.Body>
+                            </Accordion.Collapse>
+                        </Card>
+                    </div>
+                    <div class="VagaContainer">
+                        <Card>
+                            <Accordion.Toggle as={Card.Header} eventKey="1">
+                                <span class="TextoPrincipal_Area">Consultor Júnior Cobol</span>
+                                <span class="TextoPrincipal_Localizacao">
+                                    <img src={require('./geolocation.png')} />
+                                    Lisboa
+                                </span>
+                                </Accordion.Toggle>
+                            <Accordion.Collapse eventKey="1">
+                                <Card.Body>
+                                        <span>Descrição do Perfil:</span>
+                                        <ul>
+                                            <li>Recém-licenciados em Engenharia Informática ou similares;</li>
+                                            <li>Conhecimento de programação Cobol;</li>
+                                            <li>Boa capacidade de aprendizagem e atitude proativa;</li>
+                                            <li>Conhecimentos funcionais de HR</li>
+                                        </ul>
+                                        <span>Publicado em: 21/05/2019</span>
+                                        <div class="VagaChatbot robotIcon"></div>
+                                        <div class="VagaChatbotQuestion">
+                                            Clica em mim se precisares de ajuda!
+                                        </div>
+                                </Card.Body>
+                            </Accordion.Collapse>
+                        </Card>
+                    </div>
+                    <div class="VagaContainer">
+                        <Card>
+                            <Accordion.Toggle as={Card.Header} eventKey="2">
+                                <span class="TextoPrincipal_Area">Consultor Júnior Cobol</span>
+                                <span class="TextoPrincipal_Localizacao">
+                                    <img src={require('./geolocation.png')} />
+                                    Lisboa
+                                </span>
+                                </Accordion.Toggle>
+                            <Accordion.Collapse eventKey="2">
+                                <Card.Body>
+                                        <span>Descrição do Perfil:</span>
+                                        <ul>
+                                            <li>Recém-licenciados em Engenharia Informática ou similares;</li>
+                                            <li>Conhecimento de programação Cobol;</li>
+                                            <li>Boa capacidade de aprendizagem e atitude proativa;</li>
+                                            <li>Conhecimentos funcionais de HR</li>
+                                        </ul>
+                                        <span>Publicado em: 21/05/2019</span>
+                                        <div class="VagaChatbot robotIcon">
+                                        </div>
+                                        <div class="VagaChatbotQuestion">
+                                            Clica em mim se precisares de ajuda!
                                         </div>
                                 </Card.Body>
                             </Accordion.Collapse>
