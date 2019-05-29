@@ -30,6 +30,38 @@ con.connect(function(err) {
 		if (err) throw err;
 		console.log("Valores inseridos");
   });
+//****************************************Tabela Vagas************************************************************************
+	//eliminar tabela caso a mesma exista
+	sql = "drop table if exists tblVagas;";
+	con.query(sql, function (err, result) {
+		if (err) throw err;
+		console.log("Tabela apagada");
+  });
+	//criar tabela
+	sql = "create table if not exists tblVagas(id int UNIQUE not null AUTO_INCREMENT, nome varchar(100), descCandidato varchar(255), dataPublicacao date not null, localização varchar(50), área varchar(50), utilizadorID int not null, primary key(id), constraint foreign key (utilizadorID) references tblUtilizadores(id) )ENGINE = InnoDB;";
+	con.query(sql, function (err, result) {
+		if (err) throw err;
+		console.log("Tabela criada");
+  });
+  /*
+	//inserir registos
+	sql = "INSERT INTO tblUtilizadores (id, nome, username, password, email) VALUES (1, 'Andreia Ferreira', 'admin1', 'pass123', 'aferreira@hotmail.com'),(2, 'André Santos', 'admin2', 'pass123', 'asantos@hotmail.com')";
+	con.query(sql, function (err, result) {
+		if (err) throw err;
+		console.log("Valores inseridos");
+  });
+  */
+
+
+
+
+
+
+
+
+
+
+
 
    
    //termina coneção
