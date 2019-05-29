@@ -11,11 +11,9 @@ var con = mysql.createConnection({
 
 con.connect(function(err) {
   if (err) throw err;
-  console.log("Existe conexão!");
-  //criação da base de dados
-  const sql = "INSERT INTO tblUilizadores (name, username, password, email) values ('Andreia Ferreira', 'admin1', 'pass123', 'aferreira@hotmail.com'),('André Santos', 'admin2', 'pass123', 'asantos@hotmail.com')";
-  con.query(sql, function (err, result) { 
+  console.log("Connected!");
+  con.query("SELECT * FROM tblutilizadores", function (err, result, fields) {
     if (err) throw err;
-    console.log("Valores Inseridos!");
+    console.log(result);
   });
 });
