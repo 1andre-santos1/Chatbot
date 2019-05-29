@@ -64,7 +64,6 @@ function ListaVagas(){
                                         <span>Publicado em: 21/05/2019</span>
                                         <div class="VagaChatbot">
                                             <img class="robotIcon" src={require('./RobotIcon.PNG')} />
-                                            <div>Tem dúvidas sobre esta vaga?</div>
                                         </div>
                                 </Card.Body>
                             </Accordion.Collapse>
