@@ -16,6 +16,7 @@ var con = mysql.createConnection({
 	database : 'bdchatbot'
 });
 
+//Pesquisa os utlizadores
 app.get("/utilizadores", (req, res) => {
     let sql = "SELECT * FROM tblUtilizadores";
   
@@ -28,6 +29,25 @@ app.get("/utilizadores", (req, res) => {
       }
     });
   });
+
+//utilizador pelo seu ID
+app.get("/utilizadores/:id", (req,res) => {
+    let sql = "SELECT * FROM tblUtilizadores WHERE id= ?" 
+    // req.params.id mapeia o :id que está no URL acima.
+    con.query(sql, [req.params.id], (err, results) => {
+      if (err) {
+        console.error("Erro get user", err);
+        res.status(500).json({ erro: "Erro na query" });
+      } else {
+        if (results.length ==0) {
+      res.status(404).json({ erro: "User not found" });
+        } else {
+          res.status(200).json(results);
+        }
+      }
+    });
+  });
+
 
 
 //inicia o servidor
