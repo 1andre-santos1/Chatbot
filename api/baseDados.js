@@ -13,9 +13,9 @@ con.connect(function(err) {
   if (err) throw err;
   console.log("Existe conexão!");
   //criação da base de dados
-  const sql = "CREATE TABLE tblUilizadores (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), username VARCHAR(255), password VARCHAR(255), email VARCHAR(255))";
+  const sql = "INSERT INTO tblUilizadores (name, username, password, email) values ('Andreia Ferreira', 'admin1', 'pass123', 'aferreira@hotmail.com'),('André Santos', 'admin2', 'pass123', 'asantos@hotmail.com')";
   con.query(sql, function (err, result) { 
     if (err) throw err;
-    console.log("Tabela criada!");
+    console.log("Valores Inseridos!");
   });
 });
