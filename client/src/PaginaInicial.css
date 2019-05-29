@@ -2,6 +2,18 @@
 .carousel-caption {
     background-color: rgba(0,0,0,0.7);
     border-radius: 20px;
+
+    animation-name: TalkAnimation;
+    -webkit-animation-name: TalkAnimation;
+
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+
+    animation-timing-function: ease;
+    -webkit-animation-timing-function: ease;
+
+     animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
     
 }
 .carousel-caption > p{
@@ -29,3 +41,21 @@
     object-fit: cover;
 }
 
+@keyframes TalkAnimation{
+    0%{
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 1;
+    }
+}
+@-webkit-keyframes TalkAnimation{
+    0%{
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 1;
+    }
+}

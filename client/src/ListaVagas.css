@@ -2,6 +2,8 @@
     width: 100%;
     text-align: center;
     background-color: #727F8C;
+
+    
 }
 .PageBanner > img{
     position: absolute;
@@ -42,6 +44,17 @@
     top:25rem;
     margin-top: 20px;
     margin-left: 10%;
+    animation-name: TalkAnimation;
+    -webkit-animation-name: TalkAnimation;
+
+    animation-duration: 2s;
+    -webkit-animation-duration: 2s;
+
+    animation-timing-function: ease;
+    -webkit-animation-timing-function: ease;
+
+     animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
 }
 
 .TextoPrincipal_Area{
@@ -108,8 +121,87 @@
     position: absolute;
     top:60%;
 }
+
 .robotIcon{
     width: 120px;
     height: 120px;
-    cursor: pointer
+    margin-left: 85%;
+    cursor: pointer;
+    background-image:url("./RobotIcon01.png");
+    background-size: cover;
+    
+    animation-name: RobotAnimation;
+    -webkit-animation-name: RobotAnimation;
+
+    animation-duration: 2s;
+    -webkit-animation-duration: 2s;
+
+    animation-timing-function: ease;
+    -webkit-animation-timing-function: ease;
+
+     animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+
+@keyframes RobotAnimation{
+    0%{
+        background-image:url("./RobotIcon01.png");
+    }
+
+    100%{
+        background-image:url("./RobotIcon02.png");
+    }
+}
+@-webkit-keyframes RobotAnimation{
+    0%{
+        background-image:url("./RobotIcon01.png");
+    }
+    100%{
+        background-image:url("./RobotIcon02.png");
+    }
+}
+
+.VagaChatbotQuestion{
+    background-color: #3c3c44;
+    border:1px solid #17a2b8;
+    color: #28b3c9;
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 80%;
+    width: 20%;
+    text-align: center;
+    margin-left: 70%;
+    position: absolute;
+    top:50%;
+
+    animation-name: TalkAnimation;
+    -webkit-animation-name: TalkAnimation;
+
+    animation-duration: 3s;
+    -webkit-animation-duration: 3s;
+
+    animation-timing-function: ease;
+    -webkit-animation-timing-function: ease;
+
+     animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+
+@keyframes TalkAnimation{
+    0%{
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 1;
+    }
+}
+@-webkit-keyframes TalkAnimation{
+    0%{
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 1;
+    }
 }
