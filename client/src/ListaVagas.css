@@ -59,16 +59,24 @@
     margin-right: 10px;
 }
 
-
 #VagasContainer > hr{
     border-color: #17a2b8;
     width: 100%;
     margin-right: 0;
 }
+#VagaPopup{
+    position: absolute;
+}
 
 .card{
     margin-bottom: 20px;
     background-color: #3c3c44;
+    
+}
+.card-header{
+    cursor: pointer;
+}
+.card:hover{
     border: 2px solid #17a2b8;
     border-bottom: 1px solid #17a2b8 !important;
 }
@@ -80,10 +88,28 @@
     color: white;
     font-size: 14px;
 }
+
 #chatbotIcon{
     position: fixed;
     width: 60px;
     height: 60px;
     left: 90%;
     top: 90%;
+    cursor: pointer;
+}
+#chatbotIcon:hover{
+    width: 65px;
+    height: 65px;
+    top:89%;
+}
+.VagaChatbot{
+    text-align: right;
+    width:97%;
+    position: absolute;
+    top:60%;
+}
+.robotIcon{
+    width: 120px;
+    height: 120px;
+    cursor: pointer
 }
