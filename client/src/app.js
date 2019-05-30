@@ -19,9 +19,9 @@ class App extends Component {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                <NavLink href="#">Acerca de Nós</NavLink>
-                <NavLink to="/ListaVagas">Oportunidades de Emprego</NavLink>
-                <NavLink href="#pricing">Contactos</NavLink>
+                <NavLink href="#" class="NavbarLink">Acerca de Nós</NavLink>
+                <NavLink to="/ListaVagas" class="NavbarLink">Oportunidades de Emprego</NavLink>
+                <NavLink href="#pricing" class="NavbarLink">Contactos</NavLink>
                 </Nav>
                 <Form inline>
                 <FormControl type="text" placeholder="Procure aqui..." className="mr-sm-2" />
