@@ -114,6 +114,7 @@
     font-size: 14px;
 }
 
+
 #chatbotIcon{
     position: fixed;
     width: 60px;
@@ -133,7 +134,19 @@
     position: absolute;
     top:60%;
 }
+.card-body{
+    animation-name: TalkAnimation;
+    -webkit-animation-name: TalkAnimation;
 
+    animation-duration: 3s;
+    -webkit-animation-duration: 3s;
+
+    animation-timing-function: ease;
+    -webkit-animation-timing-function: ease;
+
+     animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
 .robotIcon{
     width: 120px;
     height: 120px;
