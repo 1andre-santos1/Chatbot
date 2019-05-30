@@ -16,6 +16,7 @@ function ListaVagas(){
                 <img src="https://cdn.pixabay.com/photo/2018/06/22/03/42/agreement-3489902_960_720.jpg"/>
                 <h3>Junta-te a nós!</h3>
             </div>
+            <a id="LinkAdminVagas" href="/">Administrar Vagas</a>
             <div id="DropdownMenuContainer">
                 <Dropdown as={ButtonGroup}>
                     <Button >Área</Button>

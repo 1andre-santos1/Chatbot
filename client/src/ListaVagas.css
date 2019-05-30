@@ -22,6 +22,18 @@
     font-size: 300%;
     text-shadow: 2px 2px 4px #000000;
 }
+#LinkAdminVagas{
+    position: absolute;
+    top:22rem;
+    left: 8rem;
+    z-index: 100;
+    padding-bottom:8px;
+    color: white;
+}
+#LinkAdminVagas:hover{
+    border-bottom:1px solid #17a2b8;
+    padding-bottom:7px;
+}
 #DropdownMenuContainer{
     position: absolute;
     width: 80%;
