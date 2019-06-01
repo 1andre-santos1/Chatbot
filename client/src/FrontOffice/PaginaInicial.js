@@ -19,7 +19,7 @@ function PaginaInicial() {
     <Carousel.Caption>
       <h3>Recrutamento</h3>
       <p>Não perca a oportunidade de trabalhar numa super-equipa!</p>
-      <Button variant="outline-info" href="/ListaVagas">Ver Vagas</Button>
+      <Button variant="outline-info" href="/jobs">Ver Vagas</Button>
     </Carousel.Caption>
   </Carousel.Item>
   <Carousel.Item>

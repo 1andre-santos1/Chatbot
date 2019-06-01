@@ -152,7 +152,7 @@
     height: 120px;
     margin-left: 85%;
     cursor: pointer;
-    background-image:url("./RobotIcon01.png");
+    background-image:url("../images/RobotIcon01.png");
     background-size: cover;
     
     animation-name: RobotAnimation;
@@ -170,19 +170,19 @@
 
 @keyframes RobotAnimation{
     0%{
-        background-image:url("./RobotIcon01.png");
+        background-image:url("../images/RobotIcon01.png");
     }
 
     100%{
-        background-image:url("./RobotIcon02.png");
+        background-image:url("../images/RobotIcon02.png");
     }
 }
 @-webkit-keyframes RobotAnimation{
     0%{
-        background-image:url("./RobotIcon01.png");
+        background-image:url("../images/RobotIcon01.png");
     }
     100%{
-        background-image:url("./RobotIcon02.png");
+        background-image:url("../images/RobotIcon02.png");
     }
 }
 

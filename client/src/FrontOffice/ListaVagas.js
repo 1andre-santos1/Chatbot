@@ -16,7 +16,7 @@ function ListaVagas(){
                 <img src="https://cdn.pixabay.com/photo/2018/06/22/03/42/agreement-3489902_960_720.jpg"/>
                 <h3>Junta-te a nós!</h3>
             </div>
-            <a id="LinkAdminVagas" href="/BackOffice/VagasIndex">Administrar Vagas</a>
+            <a id="LinkAdminVagas" href="/backOffice/jobs">Administrar Vagas</a>
             <div id="DropdownMenuContainer">
                 <Dropdown as={ButtonGroup}>
                     <Button >Área</Button>
@@ -49,7 +49,7 @@ function ListaVagas(){
                             <Accordion.Toggle as={Card.Header} eventKey="0">
                                 <span class="TextoPrincipal_Area">Consultor Júnior Cobol</span>
                                 <span class="TextoPrincipal_Localizacao">
-                                    <img src={require('./geolocation.png')} />
+                                    <img src={require('../images/geolocation.png')} />
                                     Lisboa
                                 </span>
                                 </Accordion.Toggle>
@@ -76,7 +76,7 @@ function ListaVagas(){
                             <Accordion.Toggle as={Card.Header} eventKey="1">
                                 <span class="TextoPrincipal_Area">Consultor Júnior Cobol</span>
                                 <span class="TextoPrincipal_Localizacao">
-                                    <img src={require('./geolocation.png')} />
+                                    <img src={require('../images/geolocation.png')} />
                                     Lisboa
                                 </span>
                                 </Accordion.Toggle>
@@ -103,7 +103,7 @@ function ListaVagas(){
                             <Accordion.Toggle as={Card.Header} eventKey="2">
                                 <span class="TextoPrincipal_Area">Consultor Júnior Cobol</span>
                                 <span class="TextoPrincipal_Localizacao">
-                                    <img src={require('./geolocation.png')} />
+                                    <img src={require('../images/geolocation.png')} />
                                     Lisboa
                                 </span>
                                 </Accordion.Toggle>
@@ -128,7 +128,7 @@ function ListaVagas(){
                     </div>
                 </Accordion>
             </div>
-            <img id="chatbotIcon" src={require('./ChatbotIcon.png')}  />
+            <img id="chatbotIcon" src={require('../images/ChatbotIcon.png')}  />
         </div>
         );
 }
