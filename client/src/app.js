@@ -20,7 +20,7 @@ class App extends Component {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                 <NavLink href="#" class="NavbarLink">Acerca de Nós</NavLink>
-                <NavLink to="/ListaVagas" class="NavbarLink">Oportunidades de Emprego</NavLink>
+                <NavLink to="/jobsList" class="NavbarLink">Oportunidades de Emprego</NavLink>
                 <NavLink href="#pricing" class="NavbarLink">Contactos</NavLink>
                 </Nav>
                 <Form inline>
