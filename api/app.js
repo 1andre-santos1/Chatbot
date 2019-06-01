@@ -84,5 +84,5 @@ app.get("/utilizadores/:id", (req,res) => {
 
 //inicia o servidor
 app.listen(port);
-console.log('API funcionando!');
+console.log('API IN!');
 
