@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const db = require('./models');
 const apiRoutes = require('./app/routes/apiRoutes.js');
+const apiLocalizacao = require ('./app/routes/apiLocalizacao.js');
 const Sequelize = require('sequelize');
 
 app.use(bodyParser.json());
@@ -19,6 +20,7 @@ const sequelize = new Sequelize('projetofinal','root','password',{
 });
 
 apiRoutes(app, db);
+apiLocalizacao(app, db);
 //db.sequelize.sync().then(function(){
     app.listen(8000, function(){
         console.log("A escuta no porto 8000");
