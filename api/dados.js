@@ -36,14 +36,14 @@ sequelize.sync({
 });
 
 //criar tabela de localização
-var Localizacao = sequelize.define('Localizacao', {
+var Localizacoes = sequelize.define('Localizacoes', {
     nome: Sequelize.STRING
 });
 
 sequelize.sync({
     force:true
 }).then(function(){
-    Localizacao.bulkCreate([
+    Localizacoes.bulkCreate([
         {
             nome:'Tomar'
         },
@@ -65,8 +65,33 @@ sequelize.sync({
     ])
 })
 
+//Criação da tabela de Áreas 
+var Areas = sequelize.define('Areas', {
+    nome: Sequelize.STRING
+});
 
-
+//inserção de valores na tabela
+sequelize.sync({
+    force: true
+}).then(function() {
+    Areas.bulkCreate([
+    {
+        nome: 'Desenvolvimento de aplicações Web'
+    },
+    {
+        nome:'Desenvolvimento de aplicações para dispositivos móveis'
+    },
+    {
+        nome:'Base de Dados'
+    },
+    {
+        nome:'Análise de sistemas'
+    },
+    {
+        nome: 'Redes de Dados'
+    }
+]);
+});
 
 //criar tabela de vagas 
 var Vagas = sequelize.define('Vagas',{
@@ -78,6 +103,7 @@ var Vagas = sequelize.define('Vagas',{
 });
 
 
+
 //inser valores na tabela vagas
 sequelize.sync({
     force: true
@@ -86,12 +112,9 @@ sequelize.sync({
     {
         nome: 'Analista Funcional Junior',
         descricaoCandidato: 'Recém-Licenciado em Engenharia Informática ou similares; Conhecimentos de inglês serão valorizados; Bom comunicador e orientação a cliente.',
-        localizacao: 2, //Lisboa
-        area: 2,
+        localizacao: 2, 
+        area: 4,
         data: Date.getDate
-    },
-    {
-        nome:''
     }
 ]);
 });

@@ -2,8 +2,9 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const db = require('./models');
-const apiRoutes = require('./app/routes/apiRoutes.js');
-const apiLocalizacao = require ('./app/routes/apiLocalizacao.js');
+const apiUtilizadores = require('./app/routes/apiUtilizadores.js');
+const apiLocalizacao = require ('./app/routes/apiLocalizacoes.js');
+const apiAreas = require ('./app/routes/apiArea.js');
 const Sequelize = require('sequelize');
 
 app.use(bodyParser.json());
@@ -19,10 +20,11 @@ const sequelize = new Sequelize('projetofinal','root','password',{
     dialect: 'mysql'
 });
 
-apiRoutes(app, db);
+apiUtilizadores(app, db);
 apiLocalizacao(app, db);
+apiAreas(app, db);
 //db.sequelize.sync().then(function(){
-    app.listen(8000, function(){
+app.listen(8000, function(){
         console.log("A escuta no porto 8000");
 });
 //});

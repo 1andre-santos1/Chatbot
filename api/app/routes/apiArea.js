@@ -1,29 +1,29 @@
-//API para a localização
+//API para a área
 
 module.exports = function (app, db) {
     //Métodos CRUD
 
-    //Listar localização
-    app.get('/api/local', function (req, res) {
-        db.Localizacao.findAll({
+    //Listar Área
+    app.get('/api/areas', function (req, res) {
+        db.Areas.findAll({
 
         }).then(function (result) {
             res.json(result);
         })
     });
 
-    //Criar Localização
-    app.post('/api/local/new', function (req, res) {
-        db.Localizacao.create({
+    //Criar Área
+    app.post('/api/areas/new', function (req, res) {
+        db.Areas.create({
             nome: req.body.nome,
         }).then(function (results) {
             res.json(results);
         })
     });
 
-    //Atualizar uma Localizção
-    app.put('/api/local/update/:id', function (req, res) {
-        db.Localizacao.update({
+    //Atualizar uma Área
+    app.put('/api/areas/update/:id', function (req, res) {
+        db.Areas.update({
             nome: req.body.nome,
 
         }, {
@@ -35,9 +35,9 @@ module.exports = function (app, db) {
             })
     });
 
-    //Apagar Localização
-    app.delete('/api/local/delete/:id', function (req, res) {
-        db.Localizacao.destroy({
+    //Apagar Área
+    app.delete('/api/areas/delete/:id', function (req, res) {
+        db.Areas.destroy({
             where: {
                 id: req.params.id
             }
