@@ -49,6 +49,16 @@ module.exports = function(app, db){
         });
     });
 
-   
+    //Listar utilizador pelo seu ID
+    app.get('/api/users/:id', function(req, res){
+        db.Utilizadores.findAll({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(result){
+            res.json(result);
+        })
+    });
+
 
 }

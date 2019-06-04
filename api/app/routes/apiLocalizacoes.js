@@ -46,4 +46,16 @@ module.exports = function (app, db) {
         });
     });
 
+    //Listar localização pelo seu ID
+    app.get('/api/local/:id', function(req, res){
+        db.Localizacoes.findAll({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(result){
+            res.json(result);
+        })
+    });
+
+
 }

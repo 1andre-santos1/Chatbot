@@ -51,4 +51,16 @@ module.exports = function (app, db) {
         });
     });
 
+    //Listar vagas pelo seu ID
+    app.get('/api/jobs/:id', function (req, res) {
+        db.Vagas.findAll({
+            where: {
+                id: req.params.id
+            }
+        }).then(function (result) {
+            res.json(result);
+        })
+    });
+
+
 }
