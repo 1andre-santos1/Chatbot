@@ -47,6 +47,7 @@ module.exports = function(app, db){
         }).then(function(results){
             res.json(results);
         });
-        });
+    });
+
 
 }
