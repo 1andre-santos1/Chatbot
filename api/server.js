@@ -5,6 +5,7 @@ const db = require('./models');
 const apiUtilizadores = require('./app/routes/apiUtilizadores.js');
 const apiLocalizacao = require ('./app/routes/apiLocalizacoes.js');
 const apiAreas = require ('./app/routes/apiArea.js');
+const apiVagas = require('./app/routes/apiVagas');
 const Sequelize = require('sequelize');
 
 app.use(bodyParser.json());
@@ -23,6 +24,7 @@ const sequelize = new Sequelize('projetofinal','root','password',{
 apiUtilizadores(app, db);
 apiLocalizacao(app, db);
 apiAreas(app, db);
+apiVagas(app, db);
 //db.sequelize.sync().then(function(){
 app.listen(8000, function(){
         console.log("A escuta no porto 8000");

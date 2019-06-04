@@ -115,7 +115,30 @@ sequelize.sync({
         localizacao: 2, 
         area: 4,
         data: Date.getDate
-    }
+    },
+    {
+        nome: 'Programador Junior',
+        descricaoCandidato: 'Recém-Licenciado em Engenharia Informática ou similares; Gosto pela área de programação; Boa comunicação e atitude proativa; Conhecimentos de inglês serão valorizados; Bom comunicador e orientação a cliente.',
+        localizacao: 2, 
+        area: 1,
+        data: Date.getDate
+    },
+    {
+
+        nome: 'Consultor Junior Cobol',
+        descricaoCandidato: 'Recém-Licenciado em Engenharia Informática ou similares; Conhecimentos de programação Cobol; Boa capacidade de aprendizagem e atitude proativa; Conhecimentos funcionais de HR.',
+        localizacao: 1, 
+        area: 1,
+        data: Date.getDate
+    },
+    {
+        nome: 'TÉCNICO DE INFORMÁTICA / RECÉM-LICENCIADO',
+        descricaoCandidato: 'Recém-Licenciado em Engenharia Informática ou similares; Interesse em técnologias IBM (iSeries; AS400) ; Bons conhecimentos Inglês; Disponibilidade',
+        localizacao: 1, 
+        area: 1,
+        data: Date.getDate
+    },
+    
 ]);
 });
 
