@@ -22,13 +22,13 @@ sequelize.sync({
     {
         nome:'Andreia Ferreira',
         username: 'admin1',
-        password: 'pass123',
+        password: '$2b$08$Fh6Y6zd4zsHP1igb15PK0.cI2O6y48jYj1zP4m6MbTylOtPKDwqk.',
         email: 'aferreira@hotmail.com'
     },
     {
         nome:'André Santos',
         username: 'admin2',
-        password: 'pass123',
+        password: '$2b$08$wklXozkQ266hgRm2y6f7KOcjZPTLdKOVTp35TbRKnbj0hmrzNVrBW',
         email: 'asantos@hotmail.com'
 
     }

@@ -1,3 +1,6 @@
+const bcrypt = require('bcrypt');
+
+
 module.exports = function(app, db){
     //Métodos CRUD
 
@@ -12,10 +15,11 @@ module.exports = function(app, db){
     
     //Criar Utilizador
     app.post('/api/users/new', function(req,res){
+        var hashPassword = bcrypt.hashSync(req.body.password, 8);
         db.Utilizadores.create({
             nome: req.body.nome,
             username: req.body.username,
-            password: req.body.password,
+            password: hashPassword,
             email: req.body.email
         }).then(function(results){
             res.json(results);
