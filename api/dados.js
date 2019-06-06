@@ -97,11 +97,18 @@ sequelize.sync({
 var Vagas = sequelize.define('Vagas',{
         nome: Sequelize.STRING,
         descricaoCandidato: Sequelize.STRING,
-        localizacao: Sequelize.INTEGER,
         area: Sequelize.INTEGER,
-        data: Sequelize.DATE
-});
+        localizacao: Sequelize.INTEGER
 
+});
+Vagas.hasMany(Areas, {
+    foreignKey: 'area',
+
+});
+Vagas.hasMany(Localizacoes, {
+    foreignKey: 'localizacao',
+        
+});
 
 
 //inser valores na tabela vagas

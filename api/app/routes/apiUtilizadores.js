@@ -33,7 +33,8 @@ module.exports = function(app, db){
             username: req.body.username,
             password: req.body.password,
             email: req.body.email
-        },{
+        },
+        {
             where: {
                 id: req.params.id
             }
