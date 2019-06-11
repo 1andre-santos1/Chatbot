@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express();
+
 const bodyParser = require('body-parser');
 const db = require('./models');
+const cors = require('cors');
 const apiUtilizadores = require('./app/routes/apiUtilizadores.js');
 const apiLocalizacao = require ('./app/routes/apiLocalizacoes.js');
 const apiAreas = require ('./app/routes/apiArea.js');
 const apiVagas = require('./app/routes/apiVagas');
+const apiLogin = require ('./app/routes/apiLogin.js');
 const Sequelize = require('sequelize');
 
 app.use(bodyParser.json());
@@ -14,6 +17,15 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json"}));
 
 app.use(express.static("app/public"));
+app.use(cors());
+
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*")
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Accept-Version")
+    res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS")
+    res.header("Access-Control-Allow-Credentials", true)
+    next();
+});
 
 
 const sequelize = new Sequelize('projetofinal','root','password',{
@@ -25,6 +37,7 @@ apiUtilizadores(app, db);
 apiLocalizacao(app, db);
 apiAreas(app, db);
 apiVagas(app, db);
+apiLogin(app, db);
 //db.sequelize.sync().then(function(){
 app.listen(8000, function(){
         console.log("A escuta no porto 8000");
