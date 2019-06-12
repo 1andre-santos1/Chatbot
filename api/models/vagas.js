@@ -2,6 +2,10 @@ module.exports = function(sequelize, Datatypes){
     const Vagas = sequelize.define( 'Vagas', {
         nome: Datatypes.STRING,
         descricaoCandidato: Datatypes.STRING,
+        trabalhoRemoto: Datatypes.BOOLEAN,
+        formacaoInic: Datatypes.BOOLEAN,
+        deslocacaoPaises: Datatypes.BOOLEAN,
+        turnos: Datatypes.BOOLEAN,
         localizacao:{
             type: Datatypes.INTEGER,
             references: {
