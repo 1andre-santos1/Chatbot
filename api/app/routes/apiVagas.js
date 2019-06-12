@@ -15,7 +15,7 @@ module.exports = function (app, db) {
     //Criar Vagas
     app.post('/api/jobs/new', function (req, res) {
         db.Jobs.create({
-            name: req.body.nome,
+            name: req.body.name,
             candidateDescript: req.body.candidateDescript,
             remote: req.body.remote,
             formation: req.params.formation,
@@ -31,7 +31,7 @@ module.exports = function (app, db) {
     //Atualizar uma Vaga
     app.put('/api/jobs/update/:id', function (req, res) {
         db.Jobs.update({
-            name: req.body.nome,
+            name: req.body.name,
             candidateDescript: req.body.candidateDescript,
             remote: req.body.remote,
             formation: req.params.formation,
