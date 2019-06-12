@@ -1,8 +1,8 @@
 //API para a vagas
 
 module.exports = function (app, db) {
-    //Métodos CRUD
 
+    //*******************************************Métodos CRUD************************************************************
     //Listar Vagas
     app.get('/api/jobs', function (req, res) {
         db.Vagas.findAll({
@@ -51,6 +51,7 @@ module.exports = function (app, db) {
         });
     });
 
+    //*******************************************************LISTAR VAGAS**************************************************************/
     //Listar vagas pelo seu ID
     app.get('/api/jobs/:id', function (req, res) {
         db.Vagas.findAll({
@@ -61,6 +62,72 @@ module.exports = function (app, db) {
             res.json(result);
         })
     });
+
+    //Lista as vagas pela sua localização
+    app.get('/api/jobs/location/:localizacao', function (req, res) {
+        db.Vagas.findAll({
+            where: {
+                localizacao: req.params.localizacao
+            }
+        }).then(function (result) {
+            res.json(result);
+        })
+    });
+
+    //Lista as vagas pela sua área
+    app.get('/api/jobs/area/:area', function (req, res) {
+        db.Vagas.findAll({
+            where: {
+                area: req.params.area
+            }
+        }).then(function (result) {
+            res.json(result);
+        })
+    });
+
+    //Listar vagas em que é necessário fazer turnos
+    app.get('/api/jobs/shifts/:shifts', function (req, res) {
+        db.Vagas.findAll({
+            where: {
+                turnos: req.params.shifts
+            }
+        }).then(function (result) {
+            res.json(result);
+        })
+    });
+
+    //Listar vagas em que é necessário formação inicial
+    app.get('/api/jobs/formation/:formation', function (req, res) {
+        db.Vagas.findAll({
+            where: {
+                formacaoInic: req.params.formation
+            }
+        }).then(function (result) {
+            res.json(result);
+        })
+    });
+
+    //Listar vagas em que é necessário viajar para outros países
+    app.get('/api/jobs/travel/:travel', function (req, res) {
+        db.Vagas.findAll({
+            where: {
+                deslocacaoPaises: req.params.travel
+            }
+        }).then(function (result) {
+            res.json(result);
+        })
+    });
+
+  //Listar vagas em que é possível trabalhar remotamente
+  app.get('/api/jobs/remote/:remote', function (req, res) {
+    db.Vagas.findAll({
+        where: {
+            trabalhoRemoto: req.params.remote
+        }
+    }).then(function (result) {
+        res.json(result);
+    })
+});
 
 
 }
