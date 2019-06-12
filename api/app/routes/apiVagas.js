@@ -12,7 +12,7 @@ module.exports = function (app, db) {
         })
     });
 
-    //Criar Vagas
+    //Criar Vagas nova
     app.post('/api/jobs/new', function (req, res) {
         db.Jobs.create({
             name: req.body.name,
