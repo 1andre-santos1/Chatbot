@@ -1,7 +1,7 @@
 //API para a vagas
 
 module.exports = function (app, db) {
-    //Métodos CRUD
+    //**************************************************/Métodos CRUD******************************************************************
 
     //Listar Vagas
     app.get('/api/jobs', function (req, res) {
@@ -51,6 +51,7 @@ module.exports = function (app, db) {
         });
     });
 
+    //**************************************************LISTAR VAGAS*********************************************************************/
     //Listar vagas pelo seu ID
     app.get('/api/jobs/:id', function (req, res) {
         db.Vagas.findAll({
@@ -62,5 +63,27 @@ module.exports = function (app, db) {
         })
     });
 
+    //Listar vagas com uma dada localização
+    app.get('/api/jobs/location/:location', function (req, res) {
+        db.Vagas.findAll({
+            where: {
+                localizacao: req.params.location
+            }
+        }).then(function (result) {
+            res.json(result);
+        })
+    });
+
+
+    //Listar vagas com uma dada área
+    app.get('/api/jobs/area/:area', function (req, res) {
+        db.Vagas.findAll({
+            where: {
+                area: req.params.area
+            }
+        }).then(function (result) {
+            res.json(result);
+        })
+    });
 
 }
