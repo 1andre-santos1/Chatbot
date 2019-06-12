@@ -1,8 +1,8 @@
 module.exports = function(sequelize, Datatypes){
-    const Localizacoes = sequelize.define( 'Localizacoes', {
-        nome: Datatypes.STRING
+    const Locations = sequelize.define( 'Locations', {
+        name: Datatypes.STRING
     });
 
-    return Localizacoes;
+    return Locations;
 
 };
