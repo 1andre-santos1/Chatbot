@@ -4,8 +4,8 @@ module.exports = function (app, db) {
     //Métodos CRUD
 
     //Listar localização
-    app.get('/api/local', function (req, res) {
-        db.Localizacoes.findAll({
+    app.get('/api/locations', function (req, res) {
+        db.Locations.findAll({
 
         }).then(function (result) {
             res.json(result);
@@ -13,18 +13,18 @@ module.exports = function (app, db) {
     });
 
     //Criar Localização
-    app.post('/api/local/new', function (req, res) {
-        db.Localizacoes.create({
-            nome: req.body.nome,
+    app.post('/api/location/new', function (req, res) {
+        db.Locations.create({
+            name: req.body.nome,
         }).then(function (results) {
             res.json(results);
         })
     });
 
     //Atualizar uma Localizção
-    app.put('/api/local/update/:id', function (req, res) {
-        db.Localizacoes.update({
-            nome: req.body.nome,
+    app.put('/api/location/update/:id', function (req, res) {
+        db.Locations.update({
+            name: req.body.name,
 
         }, {
                 where: {
@@ -36,8 +36,8 @@ module.exports = function (app, db) {
     });
 
     //Apagar Localização
-    app.delete('/api/local/delete/:id', function (req, res) {
-        db.Localizacoes.destroy({
+    app.delete('/api/location/delete/:id', function (req, res) {
+        db.Locations.destroy({
             where: {
                 id: req.params.id
             }
@@ -47,8 +47,8 @@ module.exports = function (app, db) {
     });
 
     //Listar localização pelo seu ID
-    app.get('/api/local/:id', function(req, res){
-        db.Localizacoes.findAll({
+    app.get('/api/location/:id', function(req, res){
+        db.Locations.findAll({
             where: {
                 id: req.params.id
             }

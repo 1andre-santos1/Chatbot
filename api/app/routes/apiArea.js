@@ -15,7 +15,7 @@ module.exports = function (app, db) {
     //Criar Área
     app.post('/api/areas/new', function (req, res) {
         db.Areas.create({
-            nome: req.body.nome,
+            name: req.body.name,
         }).then(function (results) {
             res.json(results);
         })
@@ -24,7 +24,7 @@ module.exports = function (app, db) {
     //Atualizar uma Área
     app.put('/api/areas/update/:id', function (req, res) {
         db.Areas.update({
-            nome: req.body.nome,
+            name: req.body.name,
 
         }, {
                 where: {
