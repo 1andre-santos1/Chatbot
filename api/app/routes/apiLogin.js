@@ -13,18 +13,18 @@ module.exports = function(app, db){
         //foram recebidos dados
         if (username && password) {
 
-            db.Utilizadores.findOne({
+            db.Users.findOne({
                 where: {
                     username: req.body.username
                 }
-            }).then(function (utilizadores) {
-                if (!utilizadores) {
+            }).then(function (users) {
+                if (!users) {
                     res.send('O utilizador não existe!');
                     res.end();
                 }
                 else {
                     //compara a password inserida pelo utilizador, com a password da BD
-                    bcrypt.compare(password, utilizadores.password, function (err, result) {
+                    bcrypt.compare(password, users.password, function (err, result) {
                         if (result == true) {
                             res.send('Password Correta! User In');
                             //req.session.loggedin = true;
