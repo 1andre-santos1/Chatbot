@@ -6,8 +6,36 @@ import Button from 'react-bootstrap/Button'
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
 import Vaga from './Vaga'
+import axios from 'axios'
 
 class ListaVagas extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            vagas:[]
+        }
+    }
+    async componentDidMount(){
+        let APIURL = "http://localhost:8000/api/jobs/";
+        let response = await axios.get(APIURL);
+        let auxArray = [...this.state.vagas];
+
+        for(let i = 0; i < response.data.length; i++)
+        {
+            let curVaga = response.data[i];
+            let responseLocalizacao = await axios.get(`http://localhost:8000/api/location/${curVaga.location}`);
+            let vaga = {
+                area: curVaga.name,
+                localizacao: responseLocalizacao.data[0].name,
+                descricao: curVaga.candidateDescript,
+                data: curVaga.createdAt.substring(0,curVaga.createdAt.indexOf('T'))
+            };
+            auxArray.push(vaga);
+        }
+        this.setState({
+            vagas: auxArray
+        });
+    }
     stringToArray(str){
         let ar = str.split(";");
         ar.pop();
@@ -48,12 +76,14 @@ class ListaVagas extends Component{
                 <div id="VagasContainer">
                     <hr />
                     <Accordion>
-                        <Vaga 
-                            area="Consultor Júnior Cobol" 
-                            localizacao="Lisboa"
-                            descricao={this.stringToArray("Recém-licenciados em Engenharia Informática ou similares;Experiência em Cobol;")}
-                            data="21/05/2019"
-                        />
+                        {this.state.vagas.map(v => 
+                            <Vaga 
+                                area={v.area} 
+                                localizacao={v.localizacao}
+                                descricao={this.stringToArray(v.descricao)}
+                                data={v.data}
+                            />
+                        )}
                     </Accordion>
                 </div>
                 <img id="chatbotIcon" src={require('../images/ChatbotIcon.png')}  />

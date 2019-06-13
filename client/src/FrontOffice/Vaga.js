@@ -4,7 +4,6 @@ import Accordion from 'react-bootstrap/Accordion'
 import './Vaga.css'
 
 class Vaga extends Component{
-
     render(){
         return(
             <div className="Vaga">
