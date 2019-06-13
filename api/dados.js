@@ -1,3 +1,4 @@
+
 const Sequelize = require('sequelize');
 const utilizadores = require('./models/utilizadores');
 
@@ -6,13 +7,80 @@ const sequelize = new Sequelize('projetofinal','root','password',{
     dialect: 'mysql'
 });
 
+//****************************************CRIAÇÃO DE TABELAS******************************************************************/
 //cria tabela de utiilizadores se não existir
 var Users = sequelize.define('Users', {
-        name: Sequelize.STRING,
-        username: Sequelize.STRING,
-        password: Sequelize.STRING,
-        email: Sequelize.STRING
+    name: Sequelize.STRING,
+    username: Sequelize.STRING,
+    password: Sequelize.STRING,
+    email: Sequelize.STRING
 });
+
+
+//criar tabela de localização
+var Locations = sequelize.define('Locations', {
+    name: Sequelize.STRING
+});
+
+
+//Criação da tabela de Áreas 
+var Areas = sequelize.define('Areas', {
+    name: Sequelize.STRING
+});
+
+
+//criar tabela de vagas 
+var Jobs = sequelize.define('Jobs',{
+        name: Sequelize.STRING,
+        candidateDescript: Sequelize.TEXT('long'),
+        remote: Sequelize.BOOLEAN,
+        formation: Sequelize.BOOLEAN,
+        travelOtCountrys: Sequelize.BOOLEAN,
+        shifts: Sequelize.BOOLEAN,
+        location: Sequelize.INTEGER,
+        area: Sequelize.INTEGER    
+});
+
+
+Locations.hasMany(Jobs, {
+    foreignKey: 'location',
+    onDelete: 'Cascade'
+        
+});
+
+Areas.hasMany(Jobs, {
+    foreignKey: 'area',
+    onDelete: 'Cascade'
+
+});
+
+//Criação da Tabela do relacionamento n:m entre as vagas e os utilizadores
+var UserJobs = sequelize.define('UserJobs', {
+    idJob: Sequelize.INTEGER,
+    idUser: Sequelize.INTEGER
+});
+
+
+ Users.belongsToMany(Jobs, {
+    through: {
+      model: UserJobs,
+      unique: false
+    },
+    foreignKey: 'idJob',
+    constraints: false
+});
+  
+  Jobs.belongsToMany(Users, {
+    through: {
+      model: UserJobs,
+      unique: false
+    },
+    foreignKey: 'idUser',
+    constraints: false
+  });
+
+
+//************************************************INSERÇÃO DE VALORES NAS TABELAS**********************************************************
 
 //inser valores na tabela utilizadores
 sequelize.sync({
@@ -35,10 +103,6 @@ sequelize.sync({
 ]);
 });
 
-//criar tabela de localização
-var Locations = sequelize.define('Locations', {
-    name: Sequelize.STRING
-});
 
 sequelize.sync({
     force:true
@@ -60,12 +124,8 @@ sequelize.sync({
             name:'Coimbra'
         }
     ])
-})
-
-//Criação da tabela de Áreas 
-var Areas = sequelize.define('Areas', {
-    name: Sequelize.STRING
 });
+
 
 //inserção de valores na tabela
 sequelize.sync({
@@ -82,30 +142,6 @@ sequelize.sync({
         name:'Desenvolvimento'
     }
 ]);
-});
-
-//criar tabela de vagas 
-var Jobs = sequelize.define('Jobs',{
-        name: Sequelize.STRING,
-        candidateDescript: Sequelize.TEXT('long'),
-        remote: Sequelize.BOOLEAN,
-        formation: Sequelize.BOOLEAN,
-        travelOtCountrys: Sequelize.BOOLEAN,
-        shifts: Sequelize.BOOLEAN,
-        location: Sequelize.INTEGER,
-        area: Sequelize.INTEGER
-        
-
-});
-Areas.hasMany(Jobs, {
-    foreignKey: 'area',
-    onDelete: 'Cascade'
-
-});
-Locations.hasMany(Jobs, {
-    foreignKey: 'location',
-    onDelete: 'Cascade'
-        
 });
 
 
@@ -262,11 +298,11 @@ sequelize.sync({
     {
         name: 'Operação de Sistemas e Monitorização',
         candidateDescript: '12º Ano em área tecnológica ou frequência académica em Tecnologia; Conhecimentos em Operação de Sistemas (preferencial); Conhecimentos em Operação de Sistemas mainframe (preferencial); Disponibilidade para turnos 24*7; Espírito de Equipa; Orientação para o cliente; Conhecimentos da língua Inglesa e falada e escrita;',
-        trabalhoRemoto: true,
-        formacaoInic: false,
-        deslocacaoPaises: false,
-        turnos: true,
-        localizacao: 2, 
+        remote: true,
+        formation: false,
+        travelOtCountrys: false,
+        shifts: true,
+        location: 2, 
         area: 2,
         data: Date.getDate
     },
@@ -361,6 +397,28 @@ sequelize.sync({
     },
     
     
+
+
+    
+]);
+
+});
+
+
+//inser valores na tabela utilizadores
+sequelize.sync({
+    force: true
+}).then(function() {
+    UserJobs.bulkCreate([
+    {
+        idJob: 1,
+        idUser: 1
+    }
 ]);
 });
+
+
+
+
+
 
