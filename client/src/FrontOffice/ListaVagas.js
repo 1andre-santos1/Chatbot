@@ -19,7 +19,7 @@ class ListaVagas extends Component{
         let APIURL = "http://localhost:8000/api/jobs/";
         let response = await axios.get(APIURL);
         let auxArray = [...this.state.vagas];
-
+        
         for(let i = 0; i < response.data.length; i++)
         {
             let curVaga = response.data[i];
