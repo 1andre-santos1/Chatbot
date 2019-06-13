@@ -6,7 +6,7 @@ module.exports = function(app, db){
 
     //Listar ustilizadores
     app.get('/api/users', function(req, res){
-        db.Utilizadores.findAll({
+        db.Users.findAll({
 
         }).then(function(result){
             res.json(result);
@@ -16,8 +16,8 @@ module.exports = function(app, db){
     //Criar Utilizador
     app.post('/api/users/new', function(req,res){
         var hashPassword = bcrypt.hashSync(req.body.password, 8);
-        db.Utilizadores.create({
-            nome: req.body.nome,
+        db.Users.create({
+            name: req.body.name,
             username: req.body.username,
             password: hashPassword,
             email: req.body.email
@@ -28,8 +28,8 @@ module.exports = function(app, db){
 
     //Atualizar um Utilizador
     app.put('/api/users/update/:id', function(req,res){
-        db.Utilizadores.update({
-            nome: req.body.nome,
+        db.Users.update({
+            name: req.body.name,
             username: req.body.username,
             password: req.body.password,
             email: req.body.email
@@ -45,7 +45,7 @@ module.exports = function(app, db){
 
     //Apagar utilizador
     app.delete('/api/users/delete/:id', function(req, res){
-        db.Utilizadores.destroy({
+        db.Users.destroy({
             where: {
                 id: req.params.id
             }
@@ -56,7 +56,7 @@ module.exports = function(app, db){
 
     //Listar utilizador pelo seu ID
     app.get('/api/users/:id', function(req, res){
-        db.Utilizadores.findAll({
+        db.Users.findAll({
             where: {
                 id: req.params.id
             }
