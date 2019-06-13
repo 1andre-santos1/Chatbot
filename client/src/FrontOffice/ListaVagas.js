@@ -5,8 +5,14 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
+import Vaga from './Vaga'
 
 class ListaVagas extends Component{
+    stringToArray(str){
+        let ar = str.split(";");
+        ar.pop();
+        return ar;
+    }
     render(){
         return(
             <div>
@@ -42,88 +48,12 @@ class ListaVagas extends Component{
                 <div id="VagasContainer">
                     <hr />
                     <Accordion>
-                        <div class="VagaContainer">
-                            <Card>
-                                <Accordion.Toggle as={Card.Header} eventKey="0">
-                                    <span class="TextoPrincipal_Area">Consultor Júnior Cobol</span>
-                                    <span class="TextoPrincipal_Localizacao">
-                                        <img src={require('../images/geolocation.png')} />
-                                        Lisboa
-                                    </span>
-                                    </Accordion.Toggle>
-                                <Accordion.Collapse eventKey="0">
-                                    <Card.Body>
-                                            <span>Descrição do Perfil:</span>
-                                            <ul>
-                                                <li>Recém-licenciados em Engenharia Informática ou similares;</li>
-                                                <li>Conhecimento de programação Cobol;</li>
-                                                <li>Boa capacidade de aprendizagem e atitude proativa;</li>
-                                                <li>Conhecimentos funcionais de HR</li>
-                                            </ul>
-                                            <span>Publicado em: 21/05/2019</span>
-                                            <div class="VagaChatbot robotIcon"></div>
-                                            <div class="VagaChatbotQuestion">
-                                                Clica em mim se precisares de ajuda!
-                                            </div>
-                                    </Card.Body>
-                                </Accordion.Collapse>
-                            </Card>
-                        </div>
-                        <div class="VagaContainer">
-                            <Card>
-                                <Accordion.Toggle as={Card.Header} eventKey="1">
-                                    <span class="TextoPrincipal_Area">Consultor Júnior Cobol</span>
-                                    <span class="TextoPrincipal_Localizacao">
-                                        <img src={require('../images/geolocation.png')} />
-                                        Lisboa
-                                    </span>
-                                    </Accordion.Toggle>
-                                <Accordion.Collapse eventKey="1">
-                                    <Card.Body>
-                                            <span>Descrição do Perfil:</span>
-                                            <ul>
-                                                <li>Recém-licenciados em Engenharia Informática ou similares;</li>
-                                                <li>Conhecimento de programação Cobol;</li>
-                                                <li>Boa capacidade de aprendizagem e atitude proativa;</li>
-                                                <li>Conhecimentos funcionais de HR</li>
-                                            </ul>
-                                            <span>Publicado em: 21/05/2019</span>
-                                            <div class="VagaChatbot robotIcon"></div>
-                                            <div class="VagaChatbotQuestion">
-                                                Clica em mim se precisares de ajuda!
-                                            </div>
-                                    </Card.Body>
-                                </Accordion.Collapse>
-                            </Card>
-                        </div>
-                        <div class="VagaContainer">
-                            <Card>
-                                <Accordion.Toggle as={Card.Header} eventKey="2">
-                                    <span class="TextoPrincipal_Area">Consultor Júnior Cobol</span>
-                                    <span class="TextoPrincipal_Localizacao">
-                                        <img src={require('../images/geolocation.png')} />
-                                        Lisboa
-                                    </span>
-                                    </Accordion.Toggle>
-                                <Accordion.Collapse eventKey="2">
-                                    <Card.Body>
-                                            <span>Descrição do Perfil:</span>
-                                            <ul>
-                                                <li>Recém-licenciados em Engenharia Informática ou similares;</li>
-                                                <li>Conhecimento de programação Cobol;</li>
-                                                <li>Boa capacidade de aprendizagem e atitude proativa;</li>
-                                                <li>Conhecimentos funcionais de HR</li>
-                                            </ul>
-                                            <span>Publicado em: 21/05/2019</span>
-                                            <div class="VagaChatbot robotIcon">
-                                            </div>
-                                            <div class="VagaChatbotQuestion">
-                                                Clica em mim se precisares de ajuda!
-                                            </div>
-                                    </Card.Body>
-                                </Accordion.Collapse>
-                            </Card>
-                        </div>
+                        <Vaga 
+                            area="Consultor Júnior Cobol" 
+                            localizacao="Lisboa"
+                            descricao={this.stringToArray("Recém-licenciados em Engenharia Informática ou similares;Experiência em Cobol;")}
+                            data="21/05/2019"
+                        />
                     </Accordion>
                 </div>
                 <img id="chatbotIcon" src={require('../images/ChatbotIcon.png')}  />
