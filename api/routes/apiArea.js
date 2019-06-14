@@ -53,7 +53,11 @@ module.exports = function (app, db) {
 
         }).then(function (results) {
             res.json(results);
-        })
+        }).catch(function(err){
+            console.error("Erro get Áreas", err)
+            res.status(500).json({ erro: "Erro na query" })
+        
+    });
     });
         
     /**

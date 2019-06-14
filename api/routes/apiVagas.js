@@ -318,8 +318,8 @@ module.exports = function (app, db) {
         }).then(function (result) {
             res.json(result);
         }).catch(function(err){
-                console.error("Erro get vagas", err)
-				res.status(500).json({ erro: "Erro na query" })
+                console.error("Erro get Vagas", err)
+				res.status(500).json({ erro: "Erro em get Vagas" })
             
         });
     });

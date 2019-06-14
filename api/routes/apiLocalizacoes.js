@@ -55,7 +55,11 @@ module.exports = function (app, db) {
 
         }).then(function (result) {
             res.json(result);
-        })
+        }).catch(function(err){
+            console.error("Erro get Localizações", err)
+            res.status(500).json({ erro: "Erro em get Localizações" })
+        
+    });
     });
 
     /**
