@@ -159,8 +159,7 @@ sequelize.sync({
         travelOtCountrys: false,
         shifts: true,
         location: 2, 
-        area: 1,
-        data: Date.getDate
+        area: 1
     },
     {
         name: 'Programador Junior',
@@ -170,8 +169,7 @@ sequelize.sync({
         travelOtCountrys: false,
         shifts: false,
         location: 1, 
-        area: 1,
-        data: Date.getDate
+        area: 1
     },
     {
         name: 'Analista Funcional Junior',
@@ -181,8 +179,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 4, 
-        area: 1,
-        data: Date.getDate
+        area: 1
     },
     {
         name: 'Técnico de Informática/Recém-Licenciado',
@@ -192,8 +189,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: true,
         location: 3, 
-        area: 1,
-        data: Date.getDate
+        area: 1
     },
     {
         name: 'Business Intelligence (M/F)',
@@ -203,8 +199,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 5, 
-        area: 1,
-        data: Date.getDate
+        area: 1
     },
     {
         name: 'Consultor SAP Junior Logística',
@@ -214,8 +209,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 4, 
-        area: 1,
-        data: Date.getDate
+        area: 1
     },
     {
         name: 'System Administrator',
@@ -225,8 +219,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 1, 
-        area: 1,
-        data: Date.getDate
+        area: 1
     },
     //********************************Área de Infraestruturas******************************/
     {
@@ -237,8 +230,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 2, 
-        area: 2,
-        data: Date.getDate
+        area: 2
     },
     {
         name: 'Adminsitrador de Sistemas Windows',
@@ -248,8 +240,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 1, 
-        area: 2,
-        data: Date.getDate
+        area: 2
     },
     {
         name: 'Programador Web',
@@ -259,8 +250,7 @@ sequelize.sync({
         travelOtCountrys: false,
         shifts: false,
         location: 3, 
-        area: 2,
-        data: Date.getDate
+        area: 2
     },
     {
         name: 'Administrador de Sistemas',
@@ -270,8 +260,7 @@ sequelize.sync({
         travelOtCountrys: false,
         shifts: false,
         location: 4, 
-        area: 2,
-        data: Date.getDate
+        area: 2
     },
     {
         name: 'Administrador de Sistemas Linux/Unix ',
@@ -281,8 +270,7 @@ sequelize.sync({
         travelOtCountrys: false,
         shifts: false,
         location: 1, 
-        area: 2,
-        data: Date.getDate
+        area: 2
     },
     {
         name: 'Security Access Management Technician (M/F)',
@@ -292,8 +280,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 5, 
-        area: 2,
-        data: Date.getDate
+        area: 2
     },
     {
         name: 'Operação de Sistemas e Monitorização',
@@ -303,8 +290,7 @@ sequelize.sync({
         travelOtCountrys: false,
         shifts: true,
         location: 2, 
-        area: 2,
-        data: Date.getDate
+        area: 2
     },
     //********************************Área de Desenvolvimento***************************/
     {
@@ -315,8 +301,7 @@ sequelize.sync({
         travelOtCountrys: false,
         shifts: false,
         location: 1, 
-        area: 3,
-        data: Date.getDate
+        area: 3
     }, 
     {
         name: 'Analista Funcional',
@@ -326,8 +311,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 4, 
-        area: 3,
-        data: Date.getDate
+        area: 3
     },
     {
         name: 'Perfil Javascript',
@@ -337,8 +321,7 @@ sequelize.sync({
         travelOtCountrys: false,
         shifts: false,
         location: 2, 
-        area: 3,
-        data: Date.getDate
+        area: 3
     }, 
     {
         name: 'Programador',
@@ -348,8 +331,7 @@ sequelize.sync({
         travelOtCountrys: false,
         shifts: false,
         location: 2, 
-        area: 3,
-        data: Date.getDate
+        area: 3
     },
     {
         name: 'Analista Programador/Analista Orgânico',
@@ -359,8 +341,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 5, 
-        area: 3,
-        data: Date.getDate
+        area: 3
     }, 
     {
         name: 'Consultores Java',
@@ -370,8 +351,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 1, 
-        area: 3,
-        data: Date.getDate
+        area: 3
     },
     {
         name: 'Consultores .NET',
@@ -381,8 +361,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 4, 
-        area: 3,
-        data: Date.getDate
+        area: 3
     },
     {
         name: 'Product Owner',
@@ -392,8 +371,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 3, 
-        area: 3,
-        data: Date.getDate
+        area: 3 
     },
     
     
