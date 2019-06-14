@@ -6,7 +6,6 @@ module.exports = function(sequelize, Datatypes){
         formation: Datatypes.BOOLEAN,
         travelOtCountrys: Datatypes.BOOLEAN,
         shifts: Datatypes.BOOLEAN,
-        date: Datatypes.DATE,
         location:{
             type: Datatypes.INTEGER,
             references: {

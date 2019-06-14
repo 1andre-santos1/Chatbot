@@ -4,11 +4,11 @@ const app = express();
 const bodyParser = require('body-parser');
 const db = require('./models');
 const cors = require('cors');
-const apiUtilizadores = require('./app/routes/apiUtilizadores.js');
-const apiLocalizacao = require ('./app/routes/apiLocalizacoes.js');
-const apiAreas = require ('./app/routes/apiArea.js');
-const apiVagas = require('./app/routes/apiVagas');
-const apiLogin = require ('./app/routes/apiLogin.js');
+const apiUtilizadores = require('./routes/apiUtilizadores.js');
+const apiLocalizacao = require ('./routes/apiLocalizacoes.js');
+const apiAreas = require ('./routes/apiArea.js');
+const apiVagas = require('./routes/apiVagas');
+const apiLogin = require ('./routes/apiLogin.js');
 const Sequelize = require('sequelize');
 
 app.use(bodyParser.json());

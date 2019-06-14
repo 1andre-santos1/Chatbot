@@ -1,19 +1,19 @@
 module.exports = function(sequelize, Datatypes){
-    const userJobs = sequelize.define( 'userJobs', {
+    const UserJobs = sequelize.define( 'UserJobs', {
         idUser: {
-            type: DataTypes.INTEGER,
+            type: Datatypes.INTEGER,
             references: 'User',
             referencesKey: 'id',
             allowNull: false
           },
-          idJob: {
-            type: DataTypes.INTEGER,
+        idJob: {
+            type: Datatypes.INTEGER,
             references: 'Jobs',
             referencesKey: 'id',
             allowNull: false
           },
     });
 
-    return userJobs;
+    return UserJobs;
 
 };

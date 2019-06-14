@@ -1,0 +1,8 @@
+
+    {
+        "name": "apidoc-example",
+        "version": "0.1.0",
+        "description": "Api Node/Express que utiliza ApiDoc.js",
+        "title": "ApiDoc Example",
+        "url":"http://projfinalchatbot.com/apidoc/index.html"
+      }
