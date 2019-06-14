@@ -84,9 +84,8 @@ module.exports = function (app, db) {
         db.Areas.create({
             name: req.body.name,
         }).then(function (results) {
-            console.log("Cração da Área com sucesso!");
-            res.json(results);
-        })
+           res.json(results);
+        });
     });
 
      /**
@@ -164,7 +163,29 @@ module.exports = function (app, db) {
                 id: req.params.id
             }
         }).then(function (results) {
-            res.json(results);
+            console.log(results);
+
+            function isEmpty(results) {
+                // null é "empty"
+                if (results == null) return true;
+                // Suponhamos que se tenha uma propriedade length com um valor diferente de zero
+                // Essa proriedade será verdadeira
+                if (results.length > 0)    return false;
+                console.log(results.length);
+                if (results.length === 0)  return true            
+                return true;
+            }
+
+            //se o array dos resultados for vazio
+            if(isEmpty(results)==true){
+                res.status(404).json({ erro: "Não é possível encontrar a Vaga!" });
+            }
+            else{
+                res.json(results);
+            }
+          
+            
+           
         });
     });
 
