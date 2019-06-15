@@ -4,7 +4,7 @@ module.exports = function (app, db) {
     //*****************************************Métodos CRUD****************************************************************************
 
     /**
-     * @api {get} /api/areas Pedido das informações das Áreas
+     * @api {get} /api/areas Pedido das Áreas existentes
      * @apiGroup Areas 
      * 
      * @apiSuccess {Object[]} areas Lista de Áreas
@@ -141,7 +141,7 @@ module.exports = function (app, db) {
     });
 
    /**
-     * @api {get} /api/areas/:id Pedido de uma Área pelo seu ID  
+     * @api {get} /api/areas/:id Pedido das informações de uma Área
      * @apiGroup Areas
      * 
      * @apiSuccess {Object[]} area Mostra a área com um determinado ID

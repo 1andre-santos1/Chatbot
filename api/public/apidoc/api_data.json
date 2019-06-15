@@ -32,7 +32,7 @@
   {
     "type": "get",
     "url": "/api/areas",
-    "title": "Pedido das informações das Áreas",
+    "title": "Pedido das Áreas existentes",
     "group": "Areas",
     "success": {
       "fields": {
@@ -99,7 +99,7 @@
   {
     "type": "get",
     "url": "/api/areas/:id",
-    "title": "Pedido de uma Área pelo seu ID",
+    "title": "Pedido das informações de uma Área",
     "group": "Areas",
     "success": {
       "fields": {
@@ -489,7 +489,7 @@
   {
     "type": "get",
     "url": "/api/jobs/:id",
-    "title": "Consulta de uma vaga pelo seu ID",
+    "title": "Pedido das informações de uma Vaga",
     "group": "Jobs",
     "success": {
       "fields": {
@@ -610,7 +610,7 @@
   {
     "type": "get",
     "url": "/api/jobs/location/:location",
-    "title": "Pedido das Vagas de uma determinada localização",
+    "title": "Pedido das Vagas disponíveis para uma determinada Localização",
     "group": "Jobs",
     "success": {
       "fields": {
@@ -891,7 +891,7 @@
   {
     "type": "delete",
     "url": "/api/location/delete/:id",
-    "title": "Permite eliminar uma Localização",
+    "title": "Eliminação de uma Localização",
     "group": "Locations",
     "success": {
       "fields": {
@@ -993,7 +993,7 @@
   {
     "type": "get",
     "url": "/api/locations",
-    "title": "Pedido das informações das Localizações",
+    "title": "Pedido das Localizações existentes",
     "group": "Locations",
     "success": {
       "fields": {
@@ -1060,7 +1060,7 @@
   {
     "type": "post",
     "url": "/api/location/new",
-    "title": "Pedido das informações das Localizações",
+    "title": "Criação de uma nova Localização",
     "group": "Locations",
     "success": {
       "fields": {
@@ -1111,7 +1111,7 @@
   {
     "type": "put",
     "url": "/api/location/update/:id",
-    "title": "Permite atualizar uma Localização",
+    "title": "Atualização de uma Localização",
     "group": "Locations",
     "success": {
       "fields": {
@@ -1137,6 +1137,36 @@
     "filename": "routes/apiLocalizacoes.js",
     "groupTitle": "Locations",
     "name": "PutApiLocationUpdateId"
+  },
+  {
+    "type": "delete",
+    "url": "/api/users/delete/:id",
+    "title": "Eliminação de um Utilizador",
+    "group": "Users",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Mensagem que informa que o Utilizador foi eliminado</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Sucesso",
+          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"Utilizador Eliminado!\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/apiUtilizadores.js",
+    "groupTitle": "Users",
+    "name": "DeleteApiUsersDeleteId"
   },
   {
     "type": "get",
@@ -1207,7 +1237,21 @@
       "examples": [
         {
           "title": "Sucesso",
-          "content": "    HTTP/1.1 200 OK\n[\n        {\n            \"id\": 1,\n            \"name\": \"Andreia Ferreira\",\n            \"username\": \"admin1\",\n            \"password\": \"$2b$08$Fh6Y6zd4zsHP1igb15PK0.cI2O6y48jYj1zP4m6MbTylOtPKDwqk.\",\n            \"email\": \"aferreira@hotmail.com\",\n            \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n            \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n        }\n      ]",
+          "content": "HTTP/1.1 200 OK\n[\n    {\n        \"id\": 1,\n        \"name\": \"Andreia Ferreira\",\n        \"username\": \"admin1\",\n        \"password\": \"$2b$08$Fh6Y6zd4zsHP1igb15PK0.cI2O6y48jYj1zP4m6MbTylOtPKDwqk.\",\n        \"email\": \"aferreira@hotmail.com\",\n        \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n        \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n    }\n ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Erro no Servidor",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  erro: \"Erro no Pedido do Utilizador\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Utilizador não encontrado",
+          "content": "HTTP/1.1 404 Not Found\n{\n  erro: \"Não é possível encontrar o Utilizador!\"\n}",
           "type": "json"
         }
       ]
@@ -1220,7 +1264,7 @@
   {
     "type": "get",
     "url": "/api/users",
-    "title": "Pedido das informações dos Utilizadores",
+    "title": "Pedido dos Utilizadores existentes",
     "group": "Users",
     "success": {
       "fields": {
@@ -1286,7 +1330,16 @@
       "examples": [
         {
           "title": "Sucesso",
-          "content": "    HTTP/1.1 200 OK\n[\n        {\n            \"id\": 1,\n            \"name\": \"Andreia Ferreira\",\n            \"username\": \"admin1\",\n            \"password\": \"$2b$08$Fh6Y6zd4zsHP1igb15PK0.cI2O6y48jYj1zP4m6MbTylOtPKDwqk.\",\n            \"email\": \"aferreira@hotmail.com\",\n            \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n            \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"André Santos\",\n            \"username\": \"admin2\",\n            \"password\": \"$2b$08$wklXozkQ266hgRm2y6f7KOcjZPTLdKOVTp35TbRKnbj0hmrzNVrBW\",\n            \"email\": \"asantos@hotmail.com\",\n            \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n            \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n        }\n      ]",
+          "content": "HTTP/1.1 200 OK\n[\n           {\n               \"id\": 1,\n               \"name\": \"Andreia Ferreira\",\n               \"username\": \"admin1\",\n               \"password\": \"$2b$08$Fh6Y6zd4zsHP1igb15PK0.cI2O6y48jYj1zP4m6MbTylOtPKDwqk.\",\n               \"email\": \"aferreira@hotmail.com\",\n               \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n               \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n           },\n           {\n               \"id\": 2,\n               \"name\": \"André Santos\",\n               \"username\": \"admin2\",\n               \"password\": \"$2b$08$wklXozkQ266hgRm2y6f7KOcjZPTLdKOVTp35TbRKnbj0hmrzNVrBW\",\n               \"email\": \"asantos@hotmail.com\",\n               \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n               \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n           }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Erro no Servidor",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  erro: \"Erro no pedido dos Utilizadores\"\n}",
           "type": "json"
         }
       ]
@@ -1371,37 +1424,7 @@
   {
     "type": "put",
     "url": "/api/users/update/:id",
-    "title": "Permite eliminar um Utilizador",
-    "group": "Users",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "message",
-            "description": "<p>Mensagem que informa que o Utilizador foi eliminado</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Sucesso",
-          "content": "    HTTP/1.1 200 OK\n{\n        \"message\": \"Utilizador Eliminado\"\n       }",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "routes/apiUtilizadores.js",
-    "groupTitle": "Users",
-    "name": "PutApiUsersUpdateId"
-  },
-  {
-    "type": "put",
-    "url": "/api/users/update/:id",
-    "title": "Permite atualizar um Utilizador",
+    "title": "Atualização de um Utilizador",
     "group": "Users",
     "success": {
       "fields": {
@@ -1418,7 +1441,7 @@
       "examples": [
         {
           "title": "Sucesso",
-          "content": "    HTTP/1.1 200 OK\n{\n        \"message\": \"Utilizador Atualizado\"\n       }",
+          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"Utilizador Atualizado com Sucesso!\"\n}",
           "type": "json"
         }
       ]

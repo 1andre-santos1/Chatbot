@@ -4,7 +4,7 @@ module.exports = function (app, db) {
     //Métodos CRUD
 
     /**
-     * @api {get} /api/locations Pedido das informações das Localizações
+     * @api {get} /api/locations Pedido das Localizações existentes
      * @apiGroup Locations 
      * 
      * @apiSuccess {Object[]} locations Lista de Localizações
@@ -69,7 +69,7 @@ module.exports = function (app, db) {
     });
 
     /**
-     * @api {post} /api/location/new Pedido das informações das Localizações
+     * @api {post} /api/location/new Criação de uma nova Localização
      * @apiGroup Locations 
      *
      * @apiSuccess {Number} id ID da Localização
@@ -96,7 +96,7 @@ module.exports = function (app, db) {
 
 
     /**
-     * @api {put} /api/location/update/:id Permite atualizar uma Localização
+     * @api {put} /api/location/update/:id Atualização de uma Localização
      * @apiGroup Locations 
      * 
      *  @apiSuccess {String} message Mensagem que informa que a Localização foi atualizada 
@@ -121,7 +121,7 @@ module.exports = function (app, db) {
     });
 
     /**
-     * @api {delete} /api/location/delete/:id Permite eliminar uma Localização
+     * @api {delete} /api/location/delete/:id Eliminação de uma Localização
      * @apiGroup Locations 
      * 
      *  @apiSuccess {String} message Mensagem que informa que a Localização foi eliminada 

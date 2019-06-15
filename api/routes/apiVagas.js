@@ -428,7 +428,7 @@ module.exports = function (app, db) {
 
     //**************************************************LISTAR VAGAS*********************************************************************/
     /**
-     * @api {get} /api/jobs/:id Consulta de uma vaga pelo seu ID
+     * @api {get} /api/jobs/:id Pedido das informações de uma Vaga
      * @apiGroup Jobs
      * 
      * @apiSuccess {Objetc[]} job Contém um determinada Vaga
@@ -506,7 +506,7 @@ module.exports = function (app, db) {
     });
 
     /**
-     * @api {get} /api/jobs/location/:location Pedido das Vagas de uma determinada localização
+     * @api {get} /api/jobs/location/:location Pedido das Vagas disponíveis para uma determinada Localização
      * @apiGroup Jobs
      * 
      * @apiSuccess {Objetc[]} jobsLocation Lista de Vagas de uma dada Localização

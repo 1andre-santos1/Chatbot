@@ -5,8 +5,8 @@ module.exports = function(app, db){
     //Métodos CRUD
 
     
-    /**
-     * @api {get} /api/users Pedido das informações dos Utilizadores
+    /** 
+     * @api {get} /api/users Pedido dos Utilizadores existentes
      * @apiGroup Users 
      * 
      * @apiSuccess {Object[]} users Lista de Utilizadores
@@ -19,27 +19,34 @@ module.exports = function(app, db){
      * @apiSuccess {DateTime} updatedAt Data da última atualização da Área
      * 
      * @apiSuccessExample {json} Sucesso
-     *     HTTP/1.1 200 OK
-     *[
-        {
-            "id": 1,
-            "name": "Andreia Ferreira",
-            "username": "admin1",
-            "password": "$2b$08$Fh6Y6zd4zsHP1igb15PK0.cI2O6y48jYj1zP4m6MbTylOtPKDwqk.",
-            "email": "aferreira@hotmail.com",
-            "createdAt": "2019-06-13T15:24:13.000Z",
-            "updatedAt": "2019-06-13T15:24:13.000Z"
-        },
-        {
-            "id": 2,
-            "name": "André Santos",
-            "username": "admin2",
-            "password": "$2b$08$wklXozkQ266hgRm2y6f7KOcjZPTLdKOVTp35TbRKnbj0hmrzNVrBW",
-            "email": "asantos@hotmail.com",
-            "createdAt": "2019-06-13T15:24:13.000Z",
-            "updatedAt": "2019-06-13T15:24:13.000Z"
-        }
-      ]
+     *  HTTP/1.1 200 OK
+     *  [
+            {
+                "id": 1,
+                "name": "Andreia Ferreira",
+                "username": "admin1",
+                "password": "$2b$08$Fh6Y6zd4zsHP1igb15PK0.cI2O6y48jYj1zP4m6MbTylOtPKDwqk.",
+                "email": "aferreira@hotmail.com",
+                "createdAt": "2019-06-13T15:24:13.000Z",
+                "updatedAt": "2019-06-13T15:24:13.000Z"
+            },
+            {
+                "id": 2,
+                "name": "André Santos",
+                "username": "admin2",
+                "password": "$2b$08$wklXozkQ266hgRm2y6f7KOcjZPTLdKOVTp35TbRKnbj0hmrzNVrBW",
+                "email": "asantos@hotmail.com",
+                "createdAt": "2019-06-13T15:24:13.000Z",
+                "updatedAt": "2019-06-13T15:24:13.000Z"
+            }
+     *  ]
+     *
+     * @apiErrorExample {json} Erro no Servidor
+     *  HTTP/1.1 500 Internal Server Error
+     *  {
+     *    erro: "Erro no pedido dos Utilizadores"
+     *  }      
+     *
      */
     app.get('/api/users', function(req, res){
         db.Users.findAll({
@@ -48,7 +55,7 @@ module.exports = function(app, db){
             res.json(result);
         }).catch(function(err){
             console.error("Erro get Utilizadores", err)
-            res.status(500).json({ erro: "Erro em get Utilizadores" })
+            res.status(500).json({ erro: "Erro no pedido dos Utilizadores" })
         });
     });
     
@@ -92,16 +99,16 @@ module.exports = function(app, db){
 
 
    /**
-     * @api {put} /api/users/update/:id Permite atualizar um Utilizador
+     * @api {put} /api/users/update/:id Atualização de um Utilizador
      * @apiGroup Users 
      * 
      *  @apiSuccess {String} message Mensagem que informa que o Utilizador foi atualizado 
      * 
      * @apiSuccessExample {json} Sucesso
-     *     HTTP/1.1 200 OK
-     * {
-        "message": "Utilizador Atualizado"
-       }
+     *  HTTP/1.1 200 OK
+     *  {
+     *      "message": "Utilizador Atualizado com Sucesso!"
+     *  }
      */
     app.put('/api/users/update/:id', function(req,res){
         db.Users.update({
@@ -115,22 +122,22 @@ module.exports = function(app, db){
                 id: req.params.id
             }
         }).then(function(result){
-            res.json({message: "Utilizador Atualizado!"});
+            res.json({message: "Utilizador Atualizado com Sucesso!"});
         })
     });
 
    
    /**
-     * @api {put} /api/users/update/:id Permite eliminar um Utilizador
+     * @api {delete} /api/users/delete/:id Eliminação de um Utilizador
      * @apiGroup Users 
      * 
      *  @apiSuccess {String} message Mensagem que informa que o Utilizador foi eliminado 
      * 
      * @apiSuccessExample {json} Sucesso
-     *     HTTP/1.1 200 OK
-     * {
-        "message": "Utilizador Eliminado"
-       }
+     *  HTTP/1.1 200 OK
+     *  {
+     *      "message": "Utilizador Eliminado!"
+     *  }
      */
     app.delete('/api/users/delete/:id', function(req, res){
         db.Users.destroy({
@@ -138,12 +145,11 @@ module.exports = function(app, db){
                 id: req.params.id
             }
         }).then(function(results){
-            res.json({message: "Utilizador Eliminado"});
+            res.json({message: "Utilizador Eliminado!"});
         });
     });
 
     
-     
     /**
      * @api {get} /api/jobs/:id Pedido das informações de um utilizador
      * @apiGroup Users 
@@ -158,27 +164,59 @@ module.exports = function(app, db){
      * @apiSuccess {DateTime} updatedAt Data da última atualização da Área
      * 
      * @apiSuccessExample {json} Sucesso
-     *     HTTP/1.1 200 OK
-     *[
-        {
-            "id": 1,
-            "name": "Andreia Ferreira",
-            "username": "admin1",
-            "password": "$2b$08$Fh6Y6zd4zsHP1igb15PK0.cI2O6y48jYj1zP4m6MbTylOtPKDwqk.",
-            "email": "aferreira@hotmail.com",
-            "createdAt": "2019-06-13T15:24:13.000Z",
-            "updatedAt": "2019-06-13T15:24:13.000Z"
-        }
-      ]
+     *  HTTP/1.1 200 OK
+     *  [
+     *      {
+     *          "id": 1,
+     *          "name": "Andreia Ferreira",
+     *          "username": "admin1",
+     *          "password": "$2b$08$Fh6Y6zd4zsHP1igb15PK0.cI2O6y48jYj1zP4m6MbTylOtPKDwqk.",
+     *          "email": "aferreira@hotmail.com",
+     *          "createdAt": "2019-06-13T15:24:13.000Z",
+     *          "updatedAt": "2019-06-13T15:24:13.000Z"
+     *      }
+     *   ]
+     * @apiErrorExample {json} Erro no Servidor
+     *  HTTP/1.1 500 Internal Server Error
+     *  {
+     *    erro: "Erro no Pedido do Utilizador"
+     *  }
+     *
+     * @apiErrorExample {json} Utilizador não encontrado
+     *  HTTP/1.1 404 Not Found
+     *  {
+     *    erro: "Não é possível encontrar o Utilizador!"
+     *  }
      */
     app.get('/api/users/:id', function(req, res){
         db.Users.findAll({
             where: {
                 id: req.params.id
             }
-        }).then(function(result){
-            res.json(result);
-        })
+        }).then(function(results){
+           
+            //função que permite saber se o objeto recebido está vazio
+            function isEmpty(results) {
+                // null é "empty"
+                if (results == null) return true;
+                // se o array tiver algo dentro dele
+                if (results.length > 0)    return false;
+                console.log(results.length);
+                //se o array não tiver lada dentro dele
+                if (results.length === 0)  return true            
+                return true;
+            }
+            //se o array dos resultados for vazio
+            if(isEmpty(results)==true){
+                res.status(404).json({ erro: "Não é possível encontrar o Utilizador!" });
+            }
+            else{
+                res.json(results);
+            }
+        }).catch(function(err){
+            console.error("Erro get Utilizadores", err)
+            res.status(500).json({ erro: "Erro no pedido do Utilizador" })
+        });
     });
 
 
