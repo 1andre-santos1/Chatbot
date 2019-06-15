@@ -1,8 +1,7 @@
 
     {
-        "name": "apidoc-example",
+        "name": "Chatbot - Documentação da API",
         "version": "0.1.0",
-        "description": "Api Node/Express que utiliza ApiDoc.js",
-        "title": "ApiDoc Example",
-        "url":"http://projfinalchatbot.com/apidoc/index.html"
+        "description": "Documentação da API do Projeto Final Recruitment Chatbot",
+        "title": "Chatbot API DOC"
       }
