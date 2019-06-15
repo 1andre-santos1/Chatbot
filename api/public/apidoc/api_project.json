@@ -1,15 +1,15 @@
 {
-  "name": "apidoc-example",
+  "name": "Chatbot - Documentação da API",
   "version": "0.1.0",
-  "description": "Api Node/Express que utiliza ApiDoc.js",
-  "title": "ApiDoc Example",
+  "description": "Documentação da API do Projeto Final Recruitment Chatbot",
+  "title": "Chatbot API DOC",
   "url": "http://projfinalchatbot.com/apidoc/index.html",
   "sampleUrl": false,
   "defaultVersion": "0.0.0",
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2019-06-14T15:22:10.943Z",
+    "time": "2019-06-15T10:14:39.778Z",
     "url": "http://apidocjs.com",
     "version": "0.17.7"
   }

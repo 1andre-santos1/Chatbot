@@ -19,13 +19,13 @@ define({ "api": [
       "examples": [
         {
           "title": "Sucesso",
-          "content": "    HTTP/1.1 200 OK\n{\n        \"message\": \"Área Eliminada!\"\n       }",
+          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"Área Eliminada!\"\n}",
           "type": "json"
         }
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiArea.js",
+    "filename": "routes/apiArea.js",
     "groupTitle": "Areas",
     "name": "DeleteApiAreasDeleteId"
   },
@@ -76,25 +76,41 @@ define({ "api": [
       },
       "examples": [
         {
-          "title": "Sucesso",
-          "content": "    HTTP/1.1 200 OK\n[\n            {\n                \"id\": 1,\n                \"name\": \"Consultorias\",\n                \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n                \"updatedAt\": \"2019-06-14T11:04:02.000Z\"\n            },\n            {\n                \"id\": 2,\n                \"name\": \"Infraestruturas\",\n                \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n                \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n            },\n            {\n                \"id\": 3,\n                \"name\": \"Consultorias\",\n                \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n                \"updatedAt\": \"2019-06-14T11:28:30.000Z\"\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Base de Dados\",\n                \"createdAt\": \"2019-06-14T10:54:16.000Z\",\n                \"updatedAt\": \"2019-06-14T10:54:16.000Z\"\n            },\n            {\n                \"id\": 6,\n                \"name\": \"Base de dados\",\n                \"createdAt\": \"2019-06-14T11:29:39.000Z\",\n                \"updatedAt\": \"2019-06-14T11:29:39.000Z\"\n            }\n        ]",
+          "title": "Resposta de Sucesso",
+          "content": "HTTP/1.1 200 OK\n[\n           {\n               \"id\": 1,\n               \"name\": \"Consultorias\",\n               \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n               \"updatedAt\": \"2019-06-14T11:04:02.000Z\"\n           },\n           {\n               \"id\": 2,\n               \"name\": \"Infraestruturas\",\n               \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n               \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n           },\n           {\n               \"id\": 3,\n               \"name\": \"Consultorias\",\n               \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n               \"updatedAt\": \"2019-06-14T11:28:30.000Z\"\n           },\n           {\n               \"id\": 4,\n               \"name\": \"Base de Dados\",\n               \"createdAt\": \"2019-06-14T10:54:16.000Z\",\n               \"updatedAt\": \"2019-06-14T10:54:16.000Z\"\n           },\n           {\n               \"id\": 6,\n               \"name\": \"Base de dados\",\n               \"createdAt\": \"2019-06-14T11:29:39.000Z\",\n               \"updatedAt\": \"2019-06-14T11:29:39.000Z\"\n           }\n       ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Erro no Servidor",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  erro: \"Erro no Pedido das Áreas\"\n}",
           "type": "json"
         }
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiArea.js",
+    "filename": "routes/apiArea.js",
     "groupTitle": "Areas",
     "name": "GetApiAreas"
   },
   {
     "type": "get",
-    "url": "/api/areas/new",
-    "title": "Criação de uma nova área",
+    "url": "/api/areas/:id",
+    "title": "Pedido de uma Área pelo seu ID",
     "group": "Areas",
     "success": {
       "fields": {
         "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "area",
+            "description": "<p>Mostra a área com um determinado ID</p>"
+          },
           {
             "group": "Success 200",
             "type": "Number",
@@ -128,20 +144,34 @@ define({ "api": [
       "examples": [
         {
           "title": "Sucesso",
-          "content": "    HTTP/1.1 200 OK\n\n[\n {\n     \"id\": 6,\n     \"name\": \"Base de dados\",\n     \"updatedAt\": \"2019-06-14T11:29:39.738Z\",\n     \"createdAt\": \"2019-06-14T11:29:39.738Z\"\n }\n]",
+          "content": "HTTP/1.1 200 OK\n[\n    {\n        \"id\": 6,\n        \"name\": \"Base de dados\",\n        \"updatedAt\": \"2019-06-14T11:29:39.738Z\",\n        \"createdAt\": \"2019-06-14T11:29:39.738Z\"\n    }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Erro no Servidor",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  erro: \"Erro no Pedido da Área\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Área não encontrada",
+          "content": "HTTP/1.1 404 Not Found\n{\n  erro: \"Não é possível encontrar a Área!\"\n}",
           "type": "json"
         }
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiArea.js",
+    "filename": "routes/apiArea.js",
     "groupTitle": "Areas",
-    "name": "GetApiAreasNew"
+    "name": "GetApiAreasId"
   },
   {
     "type": "post",
     "url": "/api/areas/new",
-    "title": "Criação de uma nova área",
+    "title": "Criação de uma nova Área",
     "group": "Areas",
     "success": {
       "fields": {
@@ -178,14 +208,14 @@ define({ "api": [
       },
       "examples": [
         {
-          "title": "Sucesso",
+          "title": "Resposta de Sucesso",
           "content": "    HTTP/1.1 200 OK\n\n{\n  \"id\": 6,\n  \"name\": \"Base de dados\",\n  \"updatedAt\": \"2019-06-14T11:29:39.738Z\",\n  \"createdAt\": \"2019-06-14T11:29:39.738Z\"\n}",
           "type": "json"
         }
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiArea.js",
+    "filename": "routes/apiArea.js",
     "groupTitle": "Areas",
     "name": "PostApiAreasNew"
   },
@@ -209,13 +239,13 @@ define({ "api": [
       "examples": [
         {
           "title": "Sucesso",
-          "content": "    HTTP/1.1 200 OK\n{\n        \"message\": \"Área Atualizada\"\n       }",
+          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"Área Atualizada!\"\n}",
           "type": "json"
         }
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiArea.js",
+    "filename": "routes/apiArea.js",
     "groupTitle": "Areas",
     "name": "PutApiAreasUpdateId"
   },
@@ -322,7 +352,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiVagas.js",
+    "filename": "routes/apiVagas.js",
     "groupTitle": "Jobs",
     "name": "GetApiJobs"
   },
@@ -429,7 +459,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiVagas.js",
+    "filename": "routes/apiVagas.js",
     "groupTitle": "Jobs",
     "name": "GetApiJobsId"
   },
@@ -536,7 +566,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiVagas.js",
+    "filename": "routes/apiVagas.js",
     "groupTitle": "Jobs",
     "name": "GetApiJobsId"
   },
@@ -643,7 +673,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiVagas.js",
+    "filename": "routes/apiVagas.js",
     "groupTitle": "Jobs",
     "name": "GetApiJobsLocationLocation"
   },
@@ -743,7 +773,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiVagas.js",
+    "filename": "routes/apiVagas.js",
     "groupTitle": "Jobs",
     "name": "PostApiJobsNew"
   },
@@ -773,7 +803,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiVagas.js",
+    "filename": "routes/apiVagas.js",
     "groupTitle": "Jobs",
     "name": "PutApiJobsUpdateId"
   },
@@ -803,7 +833,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiVagas.js",
+    "filename": "routes/apiVagas.js",
     "groupTitle": "Jobs",
     "name": "PutApiJobsUpdateId"
   },
@@ -833,7 +863,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiLocalizacoes.js",
+    "filename": "routes/apiLocalizacoes.js",
     "groupTitle": "Locations",
     "name": "DeleteApiLocationDeleteId"
   },
@@ -891,7 +921,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiLocalizacoes.js",
+    "filename": "routes/apiLocalizacoes.js",
     "groupTitle": "Locations",
     "name": "GetApiLocationId"
   },
@@ -949,7 +979,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiLocalizacoes.js",
+    "filename": "routes/apiLocalizacoes.js",
     "groupTitle": "Locations",
     "name": "GetApiLocations"
   },
@@ -1000,7 +1030,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiLocalizacoes.js",
+    "filename": "routes/apiLocalizacoes.js",
     "groupTitle": "Locations",
     "name": "PostApiLocationNew"
   },
@@ -1030,7 +1060,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiLocalizacoes.js",
+    "filename": "routes/apiLocalizacoes.js",
     "groupTitle": "Locations",
     "name": "PutApiLocationUpdateId"
   },
@@ -1109,7 +1139,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiUtilizadores.js",
+    "filename": "routes/apiUtilizadores.js",
     "groupTitle": "Users",
     "name": "GetApiJobsId"
   },
@@ -1188,7 +1218,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiUtilizadores.js",
+    "filename": "routes/apiUtilizadores.js",
     "groupTitle": "Users",
     "name": "GetApiUsers"
   },
@@ -1260,7 +1290,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiUtilizadores.js",
+    "filename": "routes/apiUtilizadores.js",
     "groupTitle": "Users",
     "name": "PostApiUsersNew"
   },
@@ -1290,7 +1320,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiUtilizadores.js",
+    "filename": "routes/apiUtilizadores.js",
     "groupTitle": "Users",
     "name": "PutApiUsersUpdateId"
   },
@@ -1320,7 +1350,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./routes/apiUtilizadores.js",
+    "filename": "routes/apiUtilizadores.js",
     "groupTitle": "Users",
     "name": "PutApiUsersUpdateId"
   }

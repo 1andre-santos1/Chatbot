@@ -13,9 +13,9 @@ module.exports = function (app, db) {
      * @apiSuccess {DateTime} createdAt Data da criação da Área
      * @apiSuccess {DateTime} updatedAt Data da última atualização da Área
      * 
-     * @apiSuccessExample {json} Sucesso
-     *     HTTP/1.1 200 OK
-     *[
+     * @apiSuccessExample {json} Resposta de Sucesso
+     *  HTTP/1.1 200 OK
+     *  [
             {
                 "id": 1,
                 "name": "Consultorias",
@@ -47,6 +47,12 @@ module.exports = function (app, db) {
                 "updatedAt": "2019-06-14T11:29:39.000Z"
             }
         ]
+     *
+     *@apiErrorExample {json} Erro no Servidor
+     *  HTTP/1.1 500 Internal Server Error
+     *  {
+     *    erro: "Erro no Pedido das Áreas"
+     *  }
      */
     app.get('/api/areas', function (req, res) {
         db.Areas.findAll({
@@ -55,13 +61,13 @@ module.exports = function (app, db) {
             res.json(results);
         }).catch(function(err){
             console.error("Erro get Áreas", err)
-            res.status(500).json({ erro: "Erro na query" })
+            res.status(500).json({ erro: "Erro no Pedido das Áreas" })
         
     });
     });
         
     /**
-     * @api {post} /api/areas/new Criação de uma nova área
+     * @api {post} /api/areas/new Criação de uma nova Área
      * @apiGroup Areas
      * 
      * @apiSuccess {Number} id ID da Área
@@ -69,7 +75,7 @@ module.exports = function (app, db) {
      * @apiSuccess {DateTime} createdAt Data da criação da Área
      * @apiSuccess {DateTime} updatedAt Data da última atualização da Área
      * 
-     * @apiSuccessExample {json} Sucesso
+     * @apiSuccessExample {json} Resposta de Sucesso
      *     HTTP/1.1 200 OK
      * 
      * {
@@ -95,10 +101,10 @@ module.exports = function (app, db) {
      * @apiSuccess {String} message Mensagem que informa que a Área foi atualizada 
      * 
      * @apiSuccessExample {json} Sucesso
-     *     HTTP/1.1 200 OK
-     * {
-        "message": "Área Atualizada"
-       }
+     *  HTTP/1.1 200 OK
+     *  {
+     *      "message": "Área Atualizada!"
+     *  }
      */
     app.put('/api/areas/update/:id', function (req, res) {
         db.Areas.update({
@@ -119,10 +125,10 @@ module.exports = function (app, db) {
      * @apiSuccess {String} message Nome da Área que foi eliminada 
      * 
      @apiSuccessExample {json} Sucesso
-     *     HTTP/1.1 200 OK
-     * {
-        "message": "Área Eliminada!"
-       }
+     *  HTTP/1.1 200 OK
+     *  {
+     *      "message": "Área Eliminada!"
+     *  }
      */
     app.delete('/api/areas/delete/:id', function (req, res) {
         db.Areas.destroy({
@@ -135,26 +141,37 @@ module.exports = function (app, db) {
     });
 
    /**
-     * @api {get} /api/areas/new Criação de uma nova área
+     * @api {get} /api/areas/:id Pedido de uma Área pelo seu ID  
      * @apiGroup Areas
      * 
-     * @apiSucess {Object[]} area Mostra a área com um determinado ID
+     * @apiSuccess {Object[]} area Mostra a área com um determinado ID
      * @apiSuccess {Number} id ID da Área
      * @apiSuccess {String} name  Nome da Área
      * @apiSuccess {DateTime} createdAt Data da criação da Área
      * @apiSuccess {DateTime} updatedAt Data da última atualização da Área
      * 
      * @apiSuccessExample {json} Sucesso
-     *     HTTP/1.1 200 OK
+     *  HTTP/1.1 200 OK
+     *  [
+     *      {
+     *          "id": 6,
+     *          "name": "Base de dados",
+     *          "updatedAt": "2019-06-14T11:29:39.738Z",
+     *          "createdAt": "2019-06-14T11:29:39.738Z"
+     *      }
+     *  ]
      * 
-     * [
+     * @apiErrorExample {json} Erro no Servidor
+     *  HTTP/1.1 500 Internal Server Error
      *  {
-     *      "id": 6,
-     *      "name": "Base de dados",
-     *      "updatedAt": "2019-06-14T11:29:39.738Z",
-     *      "createdAt": "2019-06-14T11:29:39.738Z"
+     *    erro: "Erro no Pedido da Área"
      *  }
-     * ]
+     *
+     @apiErrorExample {json} Área não encontrada
+     *  HTTP/1.1 404 Not Found
+     *  {
+     *    erro: "Não é possível encontrar a Área!"
+     *  }
      * 
      */
     app.get('/api/areas/:id', function (req, res) {
@@ -163,31 +180,28 @@ module.exports = function (app, db) {
                 id: req.params.id
             }
         }).then(function (results) {
-            console.log(results);
 
+            //função que permite saber se o objeto recebido está vazio
             function isEmpty(results) {
                 // null é "empty"
                 if (results == null) return true;
-                // Suponhamos que se tenha uma propriedade length com um valor diferente de zero
-                // Essa proriedade será verdadeira
+                // se o array tiver algo dentro dele
                 if (results.length > 0)    return false;
                 console.log(results.length);
+                //se o array não tiver lada dentro dele
                 if (results.length === 0)  return true            
                 return true;
             }
-
             //se o array dos resultados for vazio
             if(isEmpty(results)==true){
-                res.status(404).json({ erro: "Não é possível encontrar a Vaga!" });
+                res.status(404).json({ erro: "Não é possível encontrar a Área!" });
             }
             else{
                 res.json(results);
             }
-          
-            
-           
+        }).catch(function(err){
+            console.error("Erro get Áreas", err)
+            res.status(500).json({ erro: "Erro no pedido da Área" })
         });
     });
-
-
 }
