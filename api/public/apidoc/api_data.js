@@ -908,7 +908,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Sucesso",
-          "content": "    HTTP/1.1 200 OK\n{\n        \"message\": \"Localização Eliminada!\"\n       }",
+          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"Localização Eliminada!\"\n}",
           "type": "json"
         }
       ]
@@ -966,7 +966,21 @@ define({ "api": [
       "examples": [
         {
           "title": "Sucesso",
-          "content": "    HTTP/1.1 200 OK\n[\n         {\n            \"id\": 2,\n            \"name\": \"Lisboa\",\n            \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n            \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n        }\n       ]",
+          "content": "HTTP/1.1 200 OK\n[\n    {\n        \"id\": 2,\n        \"name\": \"Lisboa\",\n        \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n        \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n    }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Erro no Servidor",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  erro: \"Erro no Pedido da Localização\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Localização não encontrada",
+          "content": "HTTP/1.1 404 Not Found\n{\n  erro: \"Não é possível encontrar a Localização!\"\n}",
           "type": "json"
         }
       ]
@@ -988,7 +1002,7 @@ define({ "api": [
             "group": "Success 200",
             "type": "Object[]",
             "optional": false,
-            "field": "areas",
+            "field": "locations",
             "description": "<p>Lista de Localizações</p>"
           },
           {
@@ -1024,7 +1038,16 @@ define({ "api": [
       "examples": [
         {
           "title": "Sucesso",
-          "content": "    HTTP/1.1 200 OK\n[\n         {\n            \"id\": 1,\n            \"name\": \"Tomar\",\n            \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n            \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Lisboa\",\n            \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n            \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Viseu\",\n            \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n            \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Porto\",\n            \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n            \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Coimbra\",\n            \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n        \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n        }\n       ]",
+          "content": "HTTP/1.1 200 OK\n[\n           {\n               \"id\": 1,\n               \"name\": \"Tomar\",\n               \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n               \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n           },\n           {\n               \"id\": 2,\n               \"name\": \"Lisboa\",\n               \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n               \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n           },\n           {\n               \"id\": 3,\n               \"name\": \"Viseu\",\n               \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n               \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n           },\n           {\n               \"id\": 4,\n               \"name\": \"Porto\",\n               \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n               \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n           },\n           {\n               \"id\": 5,\n               \"name\": \"Coimbra\",\n               \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n               \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n           }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Erro no Servidor",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  erro: \"Erro no Pedido das Localizações\"\n}",
           "type": "json"
         }
       ]
@@ -1075,7 +1098,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Sucesso",
-          "content": "HTTP/1.1 200 OK\n     {\n        \"id\": 6,\n        \"name\": \"Santarém\",\n        \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n        \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n    }",
+          "content": "HTTP/1.1 200 OK\n{\n    \"id\": 6,\n    \"name\": \"Santarém\",\n    \"createdAt\": \"2019-06-13T15:24:13.000Z\",\n    \"updatedAt\": \"2019-06-13T15:24:13.000Z\"\n}",
           "type": "json"
         }
       ]
@@ -1105,7 +1128,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Sucesso",
-          "content": "    HTTP/1.1 200 OK\n{\n        \"message\": \"Localização Atualizada\"\n       }",
+          "content": "HTTP/1.1 200 OK\n{\n    \"message\": \"Localização Atualizada Sucesso!\"\n}",
           "type": "json"
         }
       ]
