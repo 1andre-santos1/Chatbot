@@ -7,13 +7,16 @@ import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
 import Vaga from './Vaga'
 import axios from 'axios'
+import JanelaChatGeral from './JanelaChatGeral'
 
 class ListaVagas extends Component{
     constructor(props){
         super(props);
         this.state={
-            vagas:[]
+            vagas:[],
+            isShowingChatGeral: false
         }
+        this.handleShowChatGeral = this.handleShowChatGeral.bind(this);
     }
     async componentDidMount(){
         let APIURL = "http://localhost:8000/api/jobs/";
@@ -41,6 +44,12 @@ class ListaVagas extends Component{
         ar.pop();
         return ar;
     }
+    handleShowChatGeral(){
+        this.setState({
+            isShowingChatGeral: !this.state.isShowingChatGeral
+        });
+    }
+    
     render(){
         return(
             <div>
@@ -86,7 +95,8 @@ class ListaVagas extends Component{
                         )}
                     </Accordion>
                 </div>
-                <img id="chatbotIcon" src={require('../images/ChatbotIcon.png')}  />
+                <img onClick={this.handleShowChatGeral} id="chatbotIcon" src={require('../images/ChatbotIcon.png')}  />
+                {this.state.isShowingChatGeral && <JanelaChatGeral />}
             </div>
         );
     }

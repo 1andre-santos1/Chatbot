@@ -15,7 +15,6 @@ const service = new AssistantV1({
 
 });
 
-
 app.post('/conversation/', (req, res) => {
     const { text} = req.body;
   
