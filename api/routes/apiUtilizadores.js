@@ -1,10 +1,11 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 
-module.exports = function(app, db){
+module.exports = function (app, db) {
     //Métodos CRUD
 
-    
+
     /** 
      * @api {get} /api/users Pedido dos Utilizadores existentes
      * @apiGroup Users 
@@ -48,17 +49,30 @@ module.exports = function(app, db){
      *  }      
      *
      */
-    app.get('/api/users', function(req, res){
-        db.Users.findAll({
+    app.get('/api/users', function (req, res) {
+        var token = req.headers['x-access-token'];
+        if (!token) {
+            return res.status(401).send({ auth: false, message: "Não existe token" }
+            )
+        }
+        try {
+            jwt.verify(token, 'chave');
 
-        }).then(function(result){
-            res.json(result);
-        }).catch(function(err){
-            console.error("Erro get Utilizadores", err)
-            res.status(500).json({ erro: "Erro no pedido dos Utilizadores" })
-        });
+            db.Users.findAll({
+
+            }).then(function (result) {
+                res.json(result);
+            }).catch(function (err) {
+                console.error("Erro get Utilizadores", err)
+                res.status(500).json({ erro: "Erro no pedido dos Utilizadores" })
+            });
+        }
+        catch{
+            return res.send("Token expirou ou inválido");
+        }
+
     });
-    
+
     /**
      * @api {post} /api/users/new Criação de um novo Utilizador
      * @apiGroup Users
@@ -85,71 +99,71 @@ module.exports = function(app, db){
         }
      * 
      */
-    app.post('/api/users/new', function(req,res){
+    app.post('/api/users/new', function (req, res) {
         var hashPassword = bcrypt.hashSync(req.body.password, 8);
         db.Users.create({
             name: req.body.name,
             username: req.body.username,
             password: hashPassword,
             email: req.body.email
-        }).then(function(results){
+        }).then(function (results) {
             res.json(results);
         })
     });
 
 
-   /**
-     * @api {put} /api/users/update/:id Atualização de um Utilizador
-     * @apiGroup Users 
-     * 
-     *  @apiSuccess {String} message Mensagem que informa que o Utilizador foi atualizado 
-     * 
-     * @apiSuccessExample {json} Sucesso
-     *  HTTP/1.1 200 OK
-     *  {
-     *      "message": "Utilizador Atualizado com Sucesso!"
-     *  }
-     */
-    app.put('/api/users/update/:id', function(req,res){
+    /**
+      * @api {put} /api/users/update/:id Atualização de um Utilizador
+      * @apiGroup Users 
+      * 
+      *  @apiSuccess {String} message Mensagem que informa que o Utilizador foi atualizado 
+      * 
+      * @apiSuccessExample {json} Sucesso
+      *  HTTP/1.1 200 OK
+      *  {
+      *      "message": "Utilizador Atualizado com Sucesso!"
+      *  }
+      */
+    app.put('/api/users/update/:id', function (req, res) {
         db.Users.update({
             name: req.body.name,
             username: req.body.username,
             password: req.body.password,
             email: req.body.email
         },
-        {
-            where: {
-                id: req.params.id
-            }
-        }).then(function(result){
-            res.json({message: "Utilizador Atualizado com Sucesso!"});
-        })
+            {
+                where: {
+                    id: req.params.id
+                }
+            }).then(function (result) {
+                res.json({ message: "Utilizador Atualizado com Sucesso!" });
+            })
     });
 
-   
-   /**
-     * @api {delete} /api/users/delete/:id Eliminação de um Utilizador
-     * @apiGroup Users 
-     * 
-     *  @apiSuccess {String} message Mensagem que informa que o Utilizador foi eliminado 
-     * 
-     * @apiSuccessExample {json} Sucesso
-     *  HTTP/1.1 200 OK
-     *  {
-     *      "message": "Utilizador Eliminado!"
-     *  }
-     */
-    app.delete('/api/users/delete/:id', function(req, res){
+
+    /**
+      * @api {delete} /api/users/delete/:id Eliminação de um Utilizador
+      * @apiGroup Users 
+      * 
+      *  @apiSuccess {String} message Mensagem que informa que o Utilizador foi eliminado 
+      * 
+      * @apiSuccessExample {json} Sucesso
+      *  HTTP/1.1 200 OK
+      *  {
+      *      "message": "Utilizador Eliminado!"
+      *  }
+      */
+    app.delete('/api/users/delete/:id', function (req, res) {
         db.Users.destroy({
             where: {
                 id: req.params.id
             }
-        }).then(function(results){
-            res.json({message: "Utilizador Eliminado!"});
+        }).then(function (results) {
+            res.json({ message: "Utilizador Eliminado!" });
         });
     });
 
-    
+
     /**
      * @api {get} /api/jobs/:id Pedido das informações de um utilizador
      * @apiGroup Users 
@@ -188,32 +202,32 @@ module.exports = function(app, db){
      *    erro: "Não é possível encontrar o Utilizador!"
      *  }
      */
-    app.get('/api/users/:id', function(req, res){
+    app.get('/api/users/:id', function (req, res) {
         db.Users.findAll({
             where: {
                 id: req.params.id
             }
-        }).then(function(results){
-           
+        }).then(function (results) {
+
             //função que permite saber se o objeto recebido está vazio
             function isEmpty(results) {
                 // null é "empty"
                 if (results == null) return true;
                 // se o array tiver algo dentro dele
-                if (results.length > 0)    return false;
+                if (results.length > 0) return false;
                 console.log(results.length);
                 //se o array não tiver lada dentro dele
-                if (results.length === 0)  return true            
+                if (results.length === 0) return true
                 return true;
             }
             //se o array dos resultados for vazio
-            if(isEmpty(results)==true){
+            if (isEmpty(results) == true) {
                 res.status(404).json({ erro: "Não é possível encontrar o Utilizador!" });
             }
-            else{
+            else {
                 res.json(results);
             }
-        }).catch(function(err){
+        }).catch(function (err) {
             console.error("Erro get Utilizadores", err)
             res.status(500).json({ erro: "Erro no pedido do Utilizador" })
         });
