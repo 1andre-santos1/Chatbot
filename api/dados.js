@@ -1,3 +1,4 @@
+
 const Sequelize = require('sequelize');
 const utilizadores = require('./models/utilizadores');
 
@@ -6,13 +7,80 @@ const sequelize = new Sequelize('projetofinal','root','password',{
     dialect: 'mysql'
 });
 
+//****************************************CRIAÇÃO DE TABELAS******************************************************************/
 //cria tabela de utiilizadores se não existir
 var Users = sequelize.define('Users', {
-        name: Sequelize.STRING,
-        username: Sequelize.STRING,
-        password: Sequelize.STRING,
-        email: Sequelize.STRING
+    name: Sequelize.STRING,
+    username: Sequelize.STRING,
+    password: Sequelize.STRING,
+    email: Sequelize.STRING
 });
+
+
+//criar tabela de localização
+var Locations = sequelize.define('Locations', {
+    name: Sequelize.STRING
+});
+
+
+//Criação da tabela de Áreas 
+var Areas = sequelize.define('Areas', {
+    name: Sequelize.STRING
+});
+
+
+//criar tabela de vagas 
+var Jobs = sequelize.define('Jobs',{
+        name: Sequelize.STRING,
+        candidateDescript: Sequelize.TEXT('long'),
+        remote: Sequelize.BOOLEAN,
+        formation: Sequelize.BOOLEAN,
+        travelOtCountrys: Sequelize.BOOLEAN,
+        shifts: Sequelize.BOOLEAN,
+        location: Sequelize.INTEGER,
+        area: Sequelize.INTEGER    
+});
+
+
+Locations.hasMany(Jobs, {
+    foreignKey: 'location',
+    onDelete: 'Cascade'
+        
+});
+
+Areas.hasMany(Jobs, {
+    foreignKey: 'area',
+    onDelete: 'Cascade'
+
+});
+
+//Criação da Tabela do relacionamento n:m entre as vagas e os utilizadores
+var UserJobs = sequelize.define('UserJobs', {
+    idJob: Sequelize.INTEGER,
+    idUser: Sequelize.INTEGER
+});
+
+
+ Users.belongsToMany(Jobs, {
+    through: {
+      model: UserJobs,
+      unique: false
+    },
+    foreignKey: 'idJob',
+    constraints: false
+});
+  
+  Jobs.belongsToMany(Users, {
+    through: {
+      model: UserJobs,
+      unique: false
+    },
+    foreignKey: 'idUser',
+    constraints: false
+  });
+
+
+//************************************************INSERÇÃO DE VALORES NAS TABELAS**********************************************************
 
 //inser valores na tabela utilizadores
 sequelize.sync({
@@ -35,10 +103,6 @@ sequelize.sync({
 ]);
 });
 
-//criar tabela de localização
-var Locations = sequelize.define('Locations', {
-    name: Sequelize.STRING
-});
 
 sequelize.sync({
     force:true
@@ -60,12 +124,8 @@ sequelize.sync({
             name:'Coimbra'
         }
     ])
-})
-
-//Criação da tabela de Áreas 
-var Areas = sequelize.define('Areas', {
-    name: Sequelize.STRING
 });
+
 
 //inserção de valores na tabela
 sequelize.sync({
@@ -84,30 +144,6 @@ sequelize.sync({
 ]);
 });
 
-//criar tabela de vagas 
-var Jobs = sequelize.define('Jobs',{
-        name: Sequelize.STRING,
-        candidateDescript: Sequelize.TEXT('long'),
-        remote: Sequelize.BOOLEAN,
-        formation: Sequelize.BOOLEAN,
-        travelOtCountrys: Sequelize.BOOLEAN,
-        shifts: Sequelize.BOOLEAN,
-        location: Sequelize.INTEGER,
-        area: Sequelize.INTEGER
-        
-
-});
-Areas.hasMany(Jobs, {
-    foreignKey: 'area',
-    onDelete: 'Cascade'
-
-});
-Locations.hasMany(Jobs, {
-    foreignKey: 'location',
-    onDelete: 'Cascade'
-        
-});
-
 
 //inser valores na tabela vagas
 sequelize.sync({
@@ -123,8 +159,7 @@ sequelize.sync({
         travelOtCountrys: false,
         shifts: true,
         location: 2, 
-        area: 1,
-        data: Date.getDate
+        area: 1
     },
     {
         name: 'Programador Junior',
@@ -134,8 +169,7 @@ sequelize.sync({
         travelOtCountrys: false,
         shifts: false,
         location: 1, 
-        area: 1,
-        data: Date.getDate
+        area: 1
     },
     {
         name: 'Analista Funcional Junior',
@@ -145,8 +179,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 4, 
-        area: 1,
-        data: Date.getDate
+        area: 1
     },
     {
         name: 'Técnico de Informática/Recém-Licenciado',
@@ -156,8 +189,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: true,
         location: 3, 
-        area: 1,
-        data: Date.getDate
+        area: 1
     },
     {
         name: 'Business Intelligence (M/F)',
@@ -167,8 +199,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 5, 
-        area: 1,
-        data: Date.getDate
+        area: 1
     },
     {
         name: 'Consultor SAP Junior Logística',
@@ -178,8 +209,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 4, 
-        area: 1,
-        data: Date.getDate
+        area: 1
     },
     {
         name: 'System Administrator',
@@ -189,8 +219,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 1, 
-        area: 1,
-        data: Date.getDate
+        area: 1
     },
     //********************************Área de Infraestruturas******************************/
     {
@@ -201,8 +230,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 2, 
-        area: 2,
-        data: Date.getDate
+        area: 2
     },
     {
         name: 'Adminsitrador de Sistemas Windows',
@@ -212,8 +240,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 1, 
-        area: 2,
-        data: Date.getDate
+        area: 2
     },
     {
         name: 'Programador Web',
@@ -223,8 +250,7 @@ sequelize.sync({
         travelOtCountrys: false,
         shifts: false,
         location: 3, 
-        area: 2,
-        data: Date.getDate
+        area: 2
     },
     {
         name: 'Administrador de Sistemas',
@@ -234,8 +260,7 @@ sequelize.sync({
         travelOtCountrys: false,
         shifts: false,
         location: 4, 
-        area: 2,
-        data: Date.getDate
+        area: 2
     },
     {
         name: 'Administrador de Sistemas Linux/Unix ',
@@ -245,8 +270,7 @@ sequelize.sync({
         travelOtCountrys: false,
         shifts: false,
         location: 1, 
-        area: 2,
-        data: Date.getDate
+        area: 2
     },
     {
         name: 'Security Access Management Technician (M/F)',
@@ -256,19 +280,17 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 5, 
-        area: 2,
-        data: Date.getDate
+        area: 2
     },
     {
         name: 'Operação de Sistemas e Monitorização',
         candidateDescript: '12º Ano em área tecnológica ou frequência académica em Tecnologia; Conhecimentos em Operação de Sistemas (preferencial); Conhecimentos em Operação de Sistemas mainframe (preferencial); Disponibilidade para turnos 24*7; Espírito de Equipa; Orientação para o cliente; Conhecimentos da língua Inglesa e falada e escrita;',
-        trabalhoRemoto: true,
-        formacaoInic: false,
-        deslocacaoPaises: false,
-        turnos: true,
-        localizacao: 2, 
-        area: 2,
-        data: Date.getDate
+        remote: true,
+        formation: false,
+        travelOtCountrys: false,
+        shifts: true,
+        location: 2, 
+        area: 2
     },
     //********************************Área de Desenvolvimento***************************/
     {
@@ -279,8 +301,7 @@ sequelize.sync({
         travelOtCountrys: false,
         shifts: false,
         location: 1, 
-        area: 3,
-        data: Date.getDate
+        area: 3
     }, 
     {
         name: 'Analista Funcional',
@@ -290,8 +311,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 4, 
-        area: 3,
-        data: Date.getDate
+        area: 3
     },
     {
         name: 'Perfil Javascript',
@@ -301,8 +321,7 @@ sequelize.sync({
         travelOtCountrys: false,
         shifts: false,
         location: 2, 
-        area: 3,
-        data: Date.getDate
+        area: 3
     }, 
     {
         name: 'Programador',
@@ -312,8 +331,7 @@ sequelize.sync({
         travelOtCountrys: false,
         shifts: false,
         location: 2, 
-        area: 3,
-        data: Date.getDate
+        area: 3
     },
     {
         name: 'Analista Programador/Analista Orgânico',
@@ -323,8 +341,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 5, 
-        area: 3,
-        data: Date.getDate
+        area: 3
     }, 
     {
         name: 'Consultores Java',
@@ -334,8 +351,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 1, 
-        area: 3,
-        data: Date.getDate
+        area: 3
     },
     {
         name: 'Consultores .NET',
@@ -345,8 +361,7 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 4, 
-        area: 3,
-        data: Date.getDate
+        area: 3
     },
     {
         name: 'Product Owner',
@@ -356,11 +371,32 @@ sequelize.sync({
         travelOtCountrys: true,
         shifts: false,
         location: 3, 
-        area: 3,
-        data: Date.getDate
+        area: 3 
     },
     
     
+
+
+    
+]);
+
+});
+
+
+//inser valores na tabela utilizadores
+sequelize.sync({
+    force: true
+}).then(function() {
+    UserJobs.bulkCreate([
+    {
+        idJob: 1,
+        idUser: 1
+    }
 ]);
 });
+
+
+
+
+
 

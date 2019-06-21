@@ -1,0 +1,37 @@
+.JanelaChatGeral{
+    position: fixed;
+    width: 300px;
+    height: 400px;
+    left: 70%;
+    top: 20%;
+    background-color: antiquewhite;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 10px;
+}
+.JanelaChatGeral-Node-Chatbot,.JanelaChatGeral-Node-User{
+    display: block;
+    margin: 10px;
+    padding:10px;
+    border-radius: 20px;
+}
+.JanelaChatGeral-Node-Chatbot{
+    background-color: aquamarine;
+}
+.JanelaChatGeral-Node-User{
+    background-color: darkgray;
+}
+.JanelaChatGeral-Form{
+    margin-top: 90%;
+}
+.JanelaChatGeral-Form-Input{
+    width: 80%;
+    margin: 0;
+}
+.JanelaChatGeral-Form-Button{
+    width: 20%;
+    margin: 0;
+}
+.JanelaChatGeral-Form-Input,.JanelaChatGeral-Form-Button{
+    display: inline-block;
+}

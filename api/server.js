@@ -4,11 +4,12 @@ const app = express();
 const bodyParser = require('body-parser');
 const db = require('./models');
 const cors = require('cors');
-const apiUtilizadores = require('./app/routes/apiUtilizadores.js');
-const apiLocalizacao = require ('./app/routes/apiLocalizacoes.js');
-const apiAreas = require ('./app/routes/apiArea.js');
-const apiVagas = require('./app/routes/apiVagas');
-const apiLogin = require ('./app/routes/apiLogin.js');
+const apiUtilizadores = require('./routes/apiUtilizadores.js');
+const apiLocalizacao = require ('./routes/apiLocalizacoes.js');
+const apiAreas = require ('./routes/apiArea.js');
+const apiVagas = require('./routes/apiVagas');
+const apiLogin = require ('./routes/apiLogin.js');
+const apiWatson = require ('./routes/apiWatson.js');
 const Sequelize = require('sequelize');
 
 app.use(bodyParser.json());
@@ -38,6 +39,8 @@ apiLocalizacao(app, db);
 apiAreas(app, db);
 apiVagas(app, db);
 apiLogin(app, db);
+apiWatson(app);
+
 //db.sequelize.sync().then(function(){
 app.listen(8000, function(){
         console.log("A escuta no porto 8000");

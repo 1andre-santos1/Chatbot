@@ -1,17 +1,17 @@
 module.exports = function(sequelize, Datatypes){
-    const Vagas = sequelize.define( 'Vagas', {
-        nome: Datatypes.STRING,
-        descricaoCandidato: Datatypes.STRING,
-        trabalhoRemoto: Datatypes.BOOLEAN,
-        formacaoInic: Datatypes.BOOLEAN,
-        deslocacaoPaises: Datatypes.BOOLEAN,
-        turnos: Datatypes.BOOLEAN,
-        localizacao:{
+    const Jobs = sequelize.define( 'Jobs', {
+        name: Datatypes.STRING,
+        candidateDescript: Datatypes.STRING,
+        remote: Datatypes.BOOLEAN,
+        formation: Datatypes.BOOLEAN,
+        travelOtCountrys: Datatypes.BOOLEAN,
+        shifts: Datatypes.BOOLEAN,
+        location:{
             type: Datatypes.INTEGER,
             references: {
-                model: 'Localizacoes',
+                model: 'Locations',
                 key: 'id',
-                as: 'localizacao'
+                as: 'location'
             }
         }, 
         area: {
@@ -26,6 +26,6 @@ module.exports = function(sequelize, Datatypes){
 
     });
 
-    return Vagas;
+    return Jobs;
 
 };
