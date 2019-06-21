@@ -85,14 +85,15 @@ class ListaVagas extends Component{
                 <div id="VagasContainer">
                     <hr />
                     <Accordion>
-                        {this.state.vagas.map(v => 
+                        {this.state.vagas.map((v,index) => (
                             <Vaga 
                                 area={v.area} 
                                 localizacao={v.localizacao}
                                 descricao={this.stringToArray(v.descricao)}
                                 data={v.data}
+                                id={index}
                             />
-                        )}
+                        ))}
                     </Accordion>
                 </div>
                 <img onClick={this.handleShowChatGeral} id="chatbotIcon" src={require('../images/ChatbotIcon.png')}  />
