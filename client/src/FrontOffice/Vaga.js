@@ -8,14 +8,14 @@ class Vaga extends Component{
         return(
             <div className="Vaga">
                             <Card>
-                                <Accordion.Toggle as={Card.Header} eventKey="0">
+                                <Accordion.Toggle as={Card.Header} eventKey={this.props.id}>
                                     <span class="TextoPrincipal_Area">{this.props.area}</span>
                                     <span class="TextoPrincipal_Localizacao">
                                         <img src={require('../images/geolocation.png')} />
                                         {this.props.localizacao}
                                     </span>
                                     </Accordion.Toggle>
-                                <Accordion.Collapse eventKey="0">
+                                <Accordion.Collapse eventKey={this.props.id}>
                                     <Card.Body>
                                             <span>Descrição do Perfil:</span>
                                             <ul>
