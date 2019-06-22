@@ -107,6 +107,12 @@ class JanelaChatGeral extends Component{
     render(){
         return(
             <div className={"JanelaChatGeral "+this.state.className}>
+               <div className="JanelaChatGeral-Banner">
+                   <h1 className="JanelaChatGeral-Banner-Title">Bem-vindo 👋</h1>
+                   <h2 className="JanelaChatGeral-Banner-SubTitle">
+                        Pergunta-nos qualquer coisa, estamos sempre à procura de alguém para conversar :)
+                    </h2>
+               </div>
                <div className="JanelaChatGeral-Dialog">
                 {this.state.inicioConversa}
                 {this.state.dialog.map(n => 
