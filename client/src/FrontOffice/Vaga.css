@@ -1,15 +1,12 @@
 .card{
     margin-bottom: 20px;
     background-color: #3c3c44;
-    
 }
+
 .card-header{
     cursor: pointer;
 }
-.card:hover{
-    border: 2px solid #17a2b8;
-    border-bottom: 1px solid #17a2b8 !important;
-}
+
 .card-body > span{
     color: white;
     font-size: 16px;
@@ -20,6 +17,7 @@
 }
 
 .card-body{
+    min-height: 220px;
     animation-name: TalkAnimation;
     -webkit-animation-name: TalkAnimation;
 

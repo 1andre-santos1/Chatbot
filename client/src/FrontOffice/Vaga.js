@@ -2,12 +2,25 @@ import React,{Component} from 'react'
 import Card from 'react-bootstrap/Card'
 import Accordion from 'react-bootstrap/Accordion'
 import './Vaga.css'
+import JanelaChatVaga from './JanelaChatVaga'
 
 class Vaga extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            isShowingJanelaChat: false
+        }
+        this.handleShowChatVaga = this.handleShowChatVaga.bind(this);
+    }
+    handleShowChatVaga(){
+        this.setState({
+            isShowingJanelaChat: !this.state.isShowingJanelaChat
+        })
+    }
     render(){
         return(
             <div className="Vaga">
-                            <Card>
+                            <Card className={true && "showingCard"}>
                                 <Accordion.Toggle as={Card.Header} eventKey={this.props.id}>
                                     <span class="TextoPrincipal_Area">{this.props.area}</span>
                                     <span class="TextoPrincipal_Localizacao">
@@ -22,10 +35,16 @@ class Vaga extends Component{
                                                 {this.props.descricao.map(d => <li>{d}</li>)}
                                             </ul>
                                             <span>Publicado em: {this.props.data}</span>
-                                            <div class="VagaChatbot robotIcon"></div>
-                                            <div class="VagaChatbotQuestion">
-                                                Clica em mim se precisares de ajuda!
-                                            </div>
+                                            {
+                                                this.state.isShowingJanelaChat &&
+                                                <JanelaChatVaga id={this.props.id} area={this.props.area} localizacao={this.props.localizacao}/> 
+                                            }
+                                                <div onClick={this.handleShowChatVaga} class="VagaChatbot robotIcon">
+                                                </div>
+                                            {
+                                                !this.state.isShowingJanelaChat &&
+                                                <div class="VagaChatbotQuestion">Clica em mim se precisares de ajuda!</div>
+                                            }
                                     </Card.Body>
                                 </Accordion.Collapse>
                             </Card>
