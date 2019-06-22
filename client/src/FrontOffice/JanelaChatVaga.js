@@ -8,7 +8,8 @@ class JanelaChatVaga extends Component{
         this.state={
             inicioConversa: null,
             pergunta: '',
-            dialog: []
+            dialog: [],
+            className: 'slide-in-blurred-bottom'
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -105,7 +106,7 @@ class JanelaChatVaga extends Component{
     }
     render(){
         return(
-            <div className="JanelaChatVaga">
+            <div className={"JanelaChatVaga "+this.state.className}>
                 <div className="JanelaChatVaga-Banner">
                    <span className="JanelaChatVaga-Banner-Title">
                         {this.props.area} 💼

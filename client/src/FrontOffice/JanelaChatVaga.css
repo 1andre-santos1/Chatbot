@@ -26,15 +26,15 @@
 }
 
 .JanelaChatVaga-Banner{
-    height: 70px;
+    height: 40px;
     width: 100%;
     background-color: #17A2B8;
-    padding: 10px 30px;
+    padding: 10px 15px;
     text-align: center;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     color:white;
-    font-size: 15px;
+    font-size: 90%;
 }
 
 .JanelaChatVaga-Node-Chatbot,.JanelaChatVaga-Node-User{
@@ -47,7 +47,7 @@
 }
 .JanelaChatVaga-Dialog{
     overflow: scroll;
-    height: 60%;
+    height: 72%;
     overflow-x: auto;
     border-bottom: 1px solid #cccccc;
 }
@@ -65,7 +65,7 @@
 .JanelaChatVaga-Form{
     margin-top: 3%;
     padding: 0px 12px; 
-    font-size: 15px;
+    font-size: 12px;
 }
 .JanelaChatVaga-Form-Input{
     width: 100%;
@@ -75,3 +75,76 @@
     background-color: #ffffff;
     outline: none;
 }
+
+.scale-up-center {
+	-webkit-animation: scale-up-center 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: scale-up-center 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+@-webkit-keyframes scale-up-center {
+    0% {
+      -webkit-transform: scale(0.5);
+              transform: scale(0.5);
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
+  @keyframes scale-up-center {
+    0% {
+      -webkit-transform: scale(0.5);
+              transform: scale(0.5);
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
+  
+.slide-in-blurred-bottom {
+	-webkit-animation: slide-in-blurred-bottom 0.5s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+	        animation: slide-in-blurred-bottom 0.5s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+}
+
+@-webkit-keyframes slide-in-blurred-bottom {
+    0% {
+      -webkit-transform: translateY(100px) scaleY(1.2) scaleX(0.2);
+              transform: translateY(100px) scaleY(1.2) scaleX(0.2);
+      -webkit-transform-origin: 50% 100%;
+              transform-origin: 50% 100%;
+      -webkit-filter: blur(40px);
+              filter: blur(40px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+              transform: translateY(0) scaleY(1) scaleX(1);
+      -webkit-transform-origin: 50% 50%;
+              transform-origin: 50% 50%;
+      -webkit-filter: blur(0);
+              filter: blur(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slide-in-blurred-bottom {
+    0% {
+      -webkit-transform: translateY(100px) scaleY(1.2) scaleX(0.2);
+              transform: translateY(100px) scaleY(1.2) scaleX(0.2);
+      -webkit-transform-origin: 50% 100%;
+              transform-origin: 50% 100%;
+      -webkit-filter: blur(40px);
+              filter: blur(40px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+              transform: translateY(0) scaleY(1) scaleX(1);
+      -webkit-transform-origin: 50% 50%;
+              transform-origin: 50% 50%;
+      -webkit-filter: blur(0);
+              filter: blur(0);
+      opacity: 1;
+    }
+  }
+
+ 

@@ -40,11 +40,11 @@ class Vaga extends Component{
                                                 <JanelaChatVaga id={this.props.id} area={this.props.area} localizacao={this.props.localizacao}/> 
                                             }
                                                 <div onClick={this.handleShowChatVaga} class="VagaChatbot robotIcon">
+                                                </div>
                                             {
                                                 !this.state.isShowingJanelaChat &&
                                                 <div class="VagaChatbotQuestion">Clica em mim se precisares de ajuda!</div>
                                             }
-                                                </div>
                                     </Card.Body>
                                 </Accordion.Collapse>
                             </Card>
