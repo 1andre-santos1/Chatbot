@@ -91,7 +91,7 @@ class JanelaChatGeral extends Component{
     adicionarMensagem(str,tipo){
         let obj = {
             text: str, 
-            className:(tipo === "chatbot") ? "JanelaChatGeral-Node-Chatbot" : "JanelaChatGeral-Node-User"
+            className:(tipo === "chatbot") ? "JanelaChatGeral-Node-Chatbot scale-up-center" : "JanelaChatGeral-Node-User scale-up-center"
         };
         
         let auxAr = [...this.state.dialog];
