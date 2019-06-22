@@ -8,7 +8,8 @@ class JanelaChatGeral extends Component{
         this.state={
             inicioConversa: null,
             pergunta: '',
-            dialog: []
+            dialog: [],
+            className: 'slide-in-blurred-bottom'
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -90,7 +91,7 @@ class JanelaChatGeral extends Component{
     adicionarMensagem(str,tipo){
         let obj = {
             text: str, 
-            className:(tipo === "chatbot") ? "JanelaChatGeral-Node-Chatbot" : "JanelaChatGeral-Node-User"
+            className:(tipo === "chatbot") ? "JanelaChatGeral-Node-Chatbot scale-up-center" : "JanelaChatGeral-Node-User scale-up-center"
         };
         
         let auxAr = [...this.state.dialog];
@@ -105,7 +106,13 @@ class JanelaChatGeral extends Component{
     }
     render(){
         return(
-            <div className="JanelaChatGeral">
+            <div className={"JanelaChatGeral "+this.state.className}>
+               <div className="JanelaChatGeral-Banner">
+                   <h1 className="JanelaChatGeral-Banner-Title">Bem-vindo 👋</h1>
+                   <h2 className="JanelaChatGeral-Banner-SubTitle">
+                        Pergunta-nos qualquer coisa, estamos sempre à procura de alguém para conversar :)
+                    </h2>
+               </div>
                <div className="JanelaChatGeral-Dialog">
                 {this.state.inicioConversa}
                 {this.state.dialog.map(n => 
@@ -116,12 +123,12 @@ class JanelaChatGeral extends Component{
                 <form onSubmit={this.handleSubmit} autoComplete="off">
                     <input onChange={this.handleChange} className="JanelaChatGeral-Form-Input" 
                         placeholder="Pergunte aqui..." name="pergunta" value={this.state.pergunta}/>
-                    <button className="JanelaChatGeral-Form-Button" type="submit">Enviar</button>
                 </form>
                </div>
             </div>
         );
     }
 }
+
 
 export default JanelaChatGeral;

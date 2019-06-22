@@ -14,7 +14,8 @@ class ListaVagas extends Component{
         super(props);
         this.state={
             vagas:[],
-            isShowingChatGeral: false
+            isShowingChatGeral: false,
+            chatGeralIconClassName: 'rotate-in-center'
         }
         this.handleShowChatGeral = this.handleShowChatGeral.bind(this);
     }
@@ -45,8 +46,10 @@ class ListaVagas extends Component{
         return ar;
     }
     handleShowChatGeral(){
+        let newClassName = (this.state.chatGeralIconClassName === 'rotate-center') ? 'rotate-in-center' : 'rotate-center';
         this.setState({
-            isShowingChatGeral: !this.state.isShowingChatGeral
+            isShowingChatGeral: !this.state.isShowingChatGeral,
+            chatGeralIconClassName: newClassName
         });
     }
     
@@ -96,7 +99,12 @@ class ListaVagas extends Component{
                         ))}
                     </Accordion>
                 </div>
-                <img onClick={this.handleShowChatGeral} id="chatbotIcon" src={require('../images/ChatbotIcon.png')}  />
+                <div onClick={this.handleShowChatGeral} id="chatbotIcon">
+                    {(this.state.isShowingChatGeral) ?  
+                        <img className={this.state.chatGeralIconClassName} src={require('../images/ChatbotIcon_Close.png')}/>  :
+                        <img className={this.state.chatGeralIconClassName} src={require('../images/ChatbotIcon_Message.png')}/>
+                    }
+                </div>
                 {this.state.isShowingChatGeral && <JanelaChatGeral />}
             </div>
         );
