@@ -50,16 +50,11 @@ class JanelaChatVaga extends Component{
 
         for(let i = 0; i < apiRequests.length; i++){
 
-            if(apiRequests[i].includes(",count"))
-            {
-                apiRequests[i] = apiRequests[i].replace(",count","");
+            let responseArray = apiRequests[i].split(', ');
 
-                let apiResponse = await axios.get(`http://localhost:8000${apiRequests[i]}`);
-
-                watsonResponse = watsonResponse.replace("{"+apiRequests[i]+",count}",apiResponse.data.length);
-            }
-            else{
-                let apiResponse = await axios.get(`http://localhost:8000${apiRequests[i]}`);
+            //se estiver a ser pedido apenas o name da vaga
+            if(responseArray.length === 1){
+                let apiResponse = await axios.get(`http://localhost:8000${responseArray[i]}//${this.props.id}`);
 
                 let values = [];
                 for(let j = 0; j < apiResponse.data.length; j++){
@@ -74,6 +69,30 @@ class JanelaChatVaga extends Component{
                 }
 
                 watsonResponse = watsonResponse.replace("{"+apiRequests[i]+"}", strAux);
+            }
+            else if(responseArray.length === 4){
+                let apiResponse = await axios.get(`http://localhost:8000${responseArray[i]}${this.props.id+1}`);
+
+                let valueAttribute = apiResponse.data[0][responseArray[1]];
+                
+                let strAux = (valueAttribute) ? responseArray[2] : responseArray[3];
+
+                watsonResponse = watsonResponse.replace("{"+apiRequests[i]+"}", strAux);
+            }
+            else if(responseArray.length > 4){
+                let apiResponse = await axios.get(`http://localhost:8000${responseArray[i]}${this.props.id+1}`);
+
+                let valueAttribute = apiResponse.data[0][responseArray[1]];
+                
+                let strAux = (valueAttribute) ? responseArray[2] : responseArray[3];
+                
+                watsonResponse = watsonResponse.replace("{"+apiRequests[i]+"}", strAux);
+
+                if(valueAttribute)
+                {
+                    for(let j = 4; j < responseArray.length; j++)
+                        watsonResponse += (responseArray[j]+" ");
+                }
             }
         }   
 
