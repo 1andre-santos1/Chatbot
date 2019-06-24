@@ -12,7 +12,15 @@ class Vaga extends Component{
         }
         this.handleShowChatVaga = this.handleShowChatVaga.bind(this);
     }
-    handleShowChatVaga(){
+    handleShowChatVaga(evt){
+        if(!this.state.isShowingJanelaChat){
+            evt.target.classList.remove('robotIcon-DeactivateChat');
+            evt.target.classList.add('robotIcon-ActivateChat');
+        }
+        else{
+            evt.target.classList.remove('robotIcon-ActivateChat');
+            evt.target.classList.add('robotIcon-DeactivateChat');
+        }
         this.setState({
             isShowingJanelaChat: !this.state.isShowingJanelaChat
         })
