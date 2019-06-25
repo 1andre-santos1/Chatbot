@@ -8,6 +8,7 @@ import Card from 'react-bootstrap/Card'
 import Vaga from './Vaga'
 import axios from 'axios'
 import JanelaChatGeral from './JanelaChatGeral'
+import DropdownAPI from './DropdownAPI'
 
 class ListaVagas extends Component{
     constructor(props){
@@ -15,7 +16,9 @@ class ListaVagas extends Component{
         this.state={
             vagas:[],
             isShowingChatGeral: false,
-            chatGeralIconClassName: 'rotate-in-center'
+            chatGeralIconClassName: 'rotate-in-center',
+            areas: [],
+            localizacoes: []
         }
         this.handleShowChatGeral = this.handleShowChatGeral.bind(this);
     }
@@ -23,6 +26,9 @@ class ListaVagas extends Component{
         let APIURL = "http://localhost:8000/api/jobs/";
         let response = await axios.get(APIURL);
         let auxArray = [...this.state.vagas];
+
+        let areasSet = [];
+        let localizacoesSet = [];
         
         for(let i = 0; i < response.data.length; i++)
         {
@@ -35,9 +41,25 @@ class ListaVagas extends Component{
                 data: curVaga.createdAt.substring(0,curVaga.createdAt.indexOf('T'))
             };
             auxArray.push(vaga);
+            
+            if(areasSet.indexOf(vaga.area) === -1)
+                areasSet.push(vaga.area);
+            if(localizacoesSet.indexOf(vaga.localizacao) === -1)
+                localizacoesSet.push(vaga.localizacao);
         }
+
+        let areasAux = [];
+        let localizacoesAux = [];
+
+        for(let i = 0; i < areasSet.length; i++)
+            areasAux.push({nome: areasSet[i], id: i});
+        for(let i = 0; i < localizacoesSet.length; i++)
+            localizacoesAux.push({nome: localizacoesSet[i], id: i});
+
         this.setState({
-            vagas: auxArray
+            vagas: auxArray,
+            areas: areasAux,
+            localizacoes: localizacoesAux
         });
     }
     stringToArray(str){
@@ -62,28 +84,8 @@ class ListaVagas extends Component{
                 </div>
                 <a id="LinkAdminVagas" href="/backOffice/jobs">Administrar Vagas</a>
                 <div id="DropdownMenuContainer">
-                    <Dropdown as={ButtonGroup}>
-                        <Button >Área</Button>
-                        <Dropdown.Toggle split id="dropdown-split-basic" />
-                        <Dropdown.Menu className="DrowpdownMenu">
-                            <Dropdown.Item hred="#/action-1">Todas</Dropdown.Item>
-                            <Dropdown.Item hred="#/action-2">Consultadoria</Dropdown.Item>
-                            <Dropdown.Item hred="#/action-3">Desenvolvimento</Dropdown.Item>
-                            <Dropdown.Item hred="#/action-3">Infraestruturas</Dropdown.Item>
-                            <Dropdown.Item hred="#/action-4">Outras</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                    <Dropdown as={ButtonGroup}>
-                        <Button >Localização</Button>
-                        <Dropdown.Toggle split id="dropdown-split-basic" />
-                        <Dropdown.Menu className="DrowpdownMenu">
-                            <Dropdown.Item hred="#/action-1">Todas</Dropdown.Item>
-                            <Dropdown.Item hred="#/action-2">Lisboa</Dropdown.Item>
-                            <Dropdown.Item hred="#/action-3">Porto</Dropdown.Item>
-                            <Dropdown.Item hred="#/action-3">Tomar</Dropdown.Item>
-                            <Dropdown.Item hred="#/action-4">Viseu</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
+                    <DropdownAPI nome="Área" list={this.state.areas}/>
+                    <DropdownAPI nome="Localização" list={this.state.localizacoes} />
                 </div>
                 <div id="VagasContainer">
                     <hr />
