@@ -6,6 +6,15 @@ module.exports = function(sequelize, Datatypes){
         email: Datatypes.STRING
 
     });
+     
+    //Associação com as Vagas
+    Users.associate = function (models) {
+        Users.belongsToMany(models.Jobs, {
+            through: 'UsersJobs',
+            as: 'vagas',
+            foreignKey: 'idUser'
+        });
+    };
 
     return Users;
 
