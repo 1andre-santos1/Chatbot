@@ -1,16 +1,16 @@
 const express = require('express');
 const app = express();
-
 const bodyParser = require('body-parser');
 const db = require('./models');
 const cors = require('cors');
+
 const apiUtilizadores = require('./routes/apiUtilizadores.js');
 const apiLocalizacao = require ('./routes/apiLocalizacoes.js');
 const apiAreas = require ('./routes/apiArea.js');
 const apiVagas = require('./routes/apiVagas');
 const apiLogin = require ('./routes/apiLogin.js');
-const apiWatson = require ('./routes/apiWatson.js');
-const apiSpecificQuestions = require('./routes/apiSpecificQuestions');
+const apiGeneralQuestions = require ('./routes/apiGeneralQuestions.js');
+const apiSpecificQuestions = require('./routes/apiSpecificQuestions.js');
 
 const Sequelize = require('sequelize');
 
@@ -41,7 +41,7 @@ apiLocalizacao(app, db);
 apiAreas(app, db);
 apiVagas(app, db);
 apiLogin(app, db);
-apiWatson(app);
+apiGeneralQuestions(app);
 apiSpecificQuestions(app);
 
 //db.sequelize.sync().then(function(){
