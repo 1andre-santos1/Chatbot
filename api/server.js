@@ -11,6 +11,7 @@ const apiVagas = require('./routes/apiVagas');
 const apiLogin = require ('./routes/apiLogin.js');
 const apiGeneralQuestions = require ('./routes/apiGeneralQuestions.js');
 const apiSpecificQuestions = require('./routes/apiSpecificQuestions.js');
+
 const Sequelize = require('sequelize');
 
 app.use(bodyParser.json());
@@ -42,6 +43,7 @@ apiVagas(app, db);
 apiLogin(app, db);
 apiGeneralQuestions(app);
 apiSpecificQuestions(app);
+
 //db.sequelize.sync().then(function(){
 app.listen(8000, function(){
         console.log("A escuta no porto 8000");

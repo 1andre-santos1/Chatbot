@@ -23,8 +23,17 @@ module.exports = function(sequelize, Datatypes){
             }
                     
         }
-
+        
     });
+ 
+    //Associação com os Utilizadores
+    Jobs.associate = function (models) {
+        Jobs.belongsToMany(models.Users, {
+            through: 'UsersJobs',
+            as: 'user',
+            foreignKey: 'idJob'
+        });
+    };
 
     return Jobs;
 

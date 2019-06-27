@@ -1,62 +1,73 @@
-.JanelaChatGeral{
-    position: fixed;
-    width: 350px;
-    height: 500px;
-    left: 72%;
-    top: 15%;
+.JanelaChatVaga{
+    position: absolute;
+    width: 30%;
+    height: 280px;
+    left: 55%;
+    top: 5%;
     background-color: #ffffff;
     border-radius: 10px;
 }
-.JanelaChatGeral-Banner{
-    height: 100px;
-    width: 100%;
-    background-color: #17A2B8;
-    padding: 10px 30px;
-    text-align: left;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+.JanelaChatVaga-Banner-Title, .JanelaChatVaga-Banner-Close{
+    display: inline-block;
 }
-.JanelaChatGeral-Banner-SubTitle,.JanelaChatGeral-Banner-Title{
+.JanelaChatVaga-Banner-Title{
+    float: left;
+}
+.JanelaChatVaga-Banner-Close{
+    float: right;
+}
+
+.JanelaChatVaga-Banner, .JanelaChatVaga-Dialog, .JanelaChatVaga-Form{
     display: block;
 }
-.JanelaChatGeral-Banner-Title{
-    font-size: 28px;
-    color: white;
+
+.JanelaChatVaga-Node-Chatbot, .JanelaChatVaga-Node-User{
+    display: block;
 }
-.JanelaChatGeral-Banner-SubTitle{
-    margin-top: 6px;
-    font-size: 12px;
-    color:rgba(255, 255, 255, 0.8)
+
+.JanelaChatVaga-Banner{
+    height: 40px;
+    width: 100%;
+    background-color: #17A2B8;
+    padding: 10px 15px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color:white;
+    font-size: 90%;
 }
-.JanelaChatGeral-Node-Chatbot,.JanelaChatGeral-Node-User{
+
+.JanelaChatVaga-Node-Chatbot,.JanelaChatVaga-Node-User{
     display: block;
     margin: 10px;
     padding:10px;
     border-radius: 20px;
     max-width:80%;
+    font-size: 14px;
 }
-.JanelaChatGeral-Dialog{
+.JanelaChatVaga-Dialog{
     overflow: scroll;
-    height: 70%;
+    height: 72%;
     overflow-x: auto;
     border-bottom: 1px solid #cccccc;
 }
-.JanelaChatGeral-Node-Chatbot{
+.JanelaChatVaga-Node-Chatbot{
     background-color: #F1F0F0;
     color: black;
     float: left;
 }
-.JanelaChatGeral-Node-User{
+.JanelaChatVaga-Node-User{
     background-color: #0084FF;
     color: white;
     float: right;
 }
-.JanelaChatGeral-Form{
+
+.JanelaChatVaga-Form{
     margin-top: 3%;
     padding: 0px 12px; 
-    font-size: 15px;
+    font-size: 12px;
 }
-.JanelaChatGeral-Form-Input{
+.JanelaChatVaga-Form-Input{
     width: 100%;
     margin: 0;
     max-height: 200px;
@@ -65,12 +76,6 @@
     outline: none;
 }
 
-.JanelaChatGeral-Form-Button:hover{
-    background-color: rgb(194, 255, 235);
-}
-.JanelaChatGeral-Form-Input,.JanelaChatGeral-Form-Button{
-    display: inline-block;
-}
 .scale-up-center {
 	-webkit-animation: scale-up-center 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 	        animation: scale-up-center 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
