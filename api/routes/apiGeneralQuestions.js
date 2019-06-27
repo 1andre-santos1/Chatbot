@@ -14,7 +14,7 @@ const bodyParser = require('body-parser');
     });
 
 module.exports = function (app) {
-    app.post('/conversation/', (req, res) => {
+    app.post('/generalQuestions/', (req, res) => {
         const { text} = req.body;
     
         const params = {
