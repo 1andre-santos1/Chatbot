@@ -55,7 +55,7 @@ Areas.hasMany(Jobs, {
 });
 
 //Criação da Tabela do relacionamento n:m entre as vagas e os utilizadores
-var UserJobs = sequelize.define('UserJobs', {
+var UsersJobs = sequelize.define('UsersJobs', {
     idJob: Sequelize.INTEGER,
     idUser: Sequelize.INTEGER
 });
@@ -63,20 +63,18 @@ var UserJobs = sequelize.define('UserJobs', {
 
  Users.belongsToMany(Jobs, {
     through: {
-      model: UserJobs,
+      model: UsersJobs,
       unique: false
     },
-    foreignKey: 'idJob',
-    constraints: false
+    foreignKey: 'idJob'
 });
   
   Jobs.belongsToMany(Users, {
     through: {
-      model: UserJobs,
+      model: UsersJobs,
       unique: false
     },
-    foreignKey: 'idUser',
-    constraints: false
+    foreignKey: 'idUser'
   });
 
 
@@ -387,7 +385,7 @@ sequelize.sync({
 sequelize.sync({
     force: true
 }).then(function() {
-    UserJobs.bulkCreate([
+    UsersJobs.bulkCreate([
     {
         idJob: 1,
         idUser: 1

@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const session = require('express-session');
+const jwt = require('jsonwebtoken');
 
 module.exports = function(app, db){
   
@@ -7,8 +8,10 @@ module.exports = function(app, db){
     app.post('/login', function(req, res){
       
         //variáveis recebidas -> username e password recebidos
+        var serverResponse = {status: "não autenticado", response: {}, token: {}};
         var username = req.body.username;
         var password = req.body.password;
+
 
         //foram recebidos dados
         if (username && password) {
@@ -19,23 +22,38 @@ module.exports = function(app, db){
                 }
             }).then(function (users) {
                 if (!users) {
-                    res.send('O utilizador não existe!');
-                    res.end();
+                    serverResponse.status = "O utilizador não existe";
+                    //res.send('O utilizador não existe!');
+                    //res.end();
+                    return res.send(serverResponse);
                 }
                 else {
                     //compara a password inserida pelo utilizador, com a password da BD
                     bcrypt.compare(password, users.password, function (err, result) {
                         if (result == true) {
-                            res.send('Password Correta! User In');
+                            var token = jwt.sign({ username: users.username, id: users.id} , 'chave', {
+                                expiresIn: 600 //duração do token
+                            })
+                            serverResponse.status="Password Correta!";
+                            serverResponse.response = users;
+                            serverResponse.token = token;
+                            //res.send('Password Correta! User In' + " token: " + token);
+
+                            
                             //req.session.loggedin = true;
 				            //req.session.username = username;
-                            res.end();
+                           // res.end();
+
                         }
                         else {
-                            res.send('Password Errada!');
-                            res.end();
+                            serverResponse.status="Password errada!";
+
+                            //res.send('Password Errada!');
+                            //res.end();
+
                         }
-                        res.end();
+                        //res.end();
+                        return res.send(serverResponse);
                     });
 
                 }

@@ -362,10 +362,10 @@ module.exports = function (app, db) {
         db.Jobs.create({
             name: req.body.name,
             candidateDescript: req.body.candidateDescript,
-            remote: req.params.remote,
-            formation: req.params.formation,
-            travelOtCountrys: req.params.travelOtCountrys,
-            shifts: req.params.shifts,
+            remote: req.body.remote,
+            formation: req.body.formation,
+            travelOtCountrys: req.body.travelOtCountrys,
+            shifts: req.body.shifts,
             location: req.body.location,
             area: req.body.area
         }).then(function (results) {

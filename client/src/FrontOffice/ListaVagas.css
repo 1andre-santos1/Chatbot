@@ -41,7 +41,7 @@
     top:20rem;
     margin-top: 20px;
 }
-#DropdownMenuContainer > div{
+#DropdownMenuContainer > div {
     width: 8%;
     margin: 10px;
 }
@@ -93,60 +93,29 @@
     position: absolute;
 }
 
-.card{
-    margin-bottom: 20px;
-    background-color: #3c3c44;
-    
-}
-.card-header{
-    cursor: pointer;
-}
-.card:hover{
-    border: 2px solid #17a2b8;
-    border-bottom: 1px solid #17a2b8 !important;
-}
-.card-body > span{
-    color: white;
-    font-size: 16px;
-}
-.card-body > ul > li{
-    color: white;
-    font-size: 14px;
-}
-
-
 #chatbotIcon{
     position: fixed;
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     left: 90%;
     top: 90%;
     cursor: pointer;
+    background-color: #17A2B8;
+    border-radius: 50%;
 }
-#chatbotIcon:hover{
-    width: 65px;
-    height: 65px;
-    top:89%;
+#chatbotIcon > img {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
 }
+
 .VagaChatbot{
     text-align: right;
     width:97%;
     position: absolute;
     top:60%;
 }
-.card-body{
-    animation-name: TalkAnimation;
-    -webkit-animation-name: TalkAnimation;
 
-    animation-duration: 3s;
-    -webkit-animation-duration: 3s;
-
-    animation-timing-function: ease;
-    -webkit-animation-timing-function: ease;
-
-     animation-fill-mode: forwards;
-    -webkit-animation-fill-mode: forwards;
-}
 .robotIcon{
     width: 120px;
     height: 120px;
@@ -230,3 +199,60 @@
         opacity: 1;
     }
 }
+
+.rotate-center{
+    -webkit-animation: rotate-center 0.7s ease-out alternate forwards;
+	        animation: rotate-center 0.7s ease-out alternate forwards;
+}
+.rotate-in-center {
+	-webkit-animation: rotate-in-center 0.7s ease-out alternate forwards;
+	        animation: rotate-in-center 0.7s ease-out alternate forwards;
+}
+@-webkit-keyframes rotate-center {
+    0% {
+        -webkit-transform: rotate(180deg);
+                transform: rotate(180deg);
+        opacity: 0;
+      }
+      100% {
+        -webkit-transform: rotate(0);
+                transform: rotate(0);
+        opacity: 1;
+      }
+  }
+  @keyframes rotate-center {
+    0% {
+        -webkit-transform: rotate(180deg);
+                transform: rotate(180deg);
+        opacity: 0;
+      }
+      100% {
+        -webkit-transform: rotate(0);
+                transform: rotate(0);
+        opacity: 1;
+      }
+  }
+  @-webkit-keyframes rotate-in-center {
+    0% {
+      -webkit-transform: rotate(-180deg);
+              transform: rotate(-180deg);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: rotate(0);
+              transform: rotate(0);
+      opacity: 1;
+    }
+  }
+  @keyframes rotate-in-center {
+    0% {
+      -webkit-transform: rotate(-180deg);
+              transform: rotate(-180deg);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: rotate(0);
+              transform: rotate(0);
+      opacity: 1;
+    }
+  }
