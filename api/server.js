@@ -9,6 +9,7 @@ const apiLocalizacao = require ('./routes/apiLocalizacoes.js');
 const apiAreas = require ('./routes/apiArea.js');
 const apiVagas = require('./routes/apiVagas');
 const apiLogin = require ('./routes/apiLogin.js');
+const apiSpecificQuestions = require('./routes/apiSpecificQuestions');
 const Sequelize = require('sequelize');
 
 app.use(bodyParser.json());
@@ -38,6 +39,7 @@ apiLocalizacao(app, db);
 apiAreas(app, db);
 apiVagas(app, db);
 apiLogin(app, db);
+apiSpecificQuestions(app);
 //db.sequelize.sync().then(function(){
 app.listen(8000, function(){
         console.log("A escuta no porto 8000");
