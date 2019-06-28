@@ -820,4 +820,38 @@ module.exports = function (app, db) {
         });
     });
 
+    app.get('/api/jobs/:idLocal/:idArea', function (req, res) {
+        db.Jobs.findAll({
+            where: {
+                location: req.params.idLocal,
+                area: req.params.idArea
+            }
+        }).then(function (results) {
+            
+            //função que permite saber se o objeto recebido está vazio
+            function isEmpty(results) {
+                // null é "empty"
+                if (results == null) return true;
+                // se o array tiver algo dentro dele
+                if (results.length > 0)    return false;
+                console.log(results.length);
+                //se o array não tiver lada dentro dele
+                if (results.length === 0)  return true            
+                return true;
+            }
+            //se o array dos resultados for vazio
+            if(isEmpty(results)==true){
+                res.status(404).json({ erro: "A Área  pretendida não existe!" });
+            }
+            else{
+                res.json(results);
+            }
+        }).catch(function(err){
+            console.error("Erro get Vagas", err)
+            res.status(500).json({ erro: "Erro no pedido da Vaga" })
+        });
+    });
+
+
+
 }
