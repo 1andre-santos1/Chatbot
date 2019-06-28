@@ -6,7 +6,8 @@ module.exports = function(app, db){
   
     //LOGIN
     app.post('/login', function(req, res){
-      
+        
+        console.log(req.body)
         //variáveis recebidas -> username e password recebidos
         var serverResponse = {status: "não autenticado", response: {}, token: {}};
         var username = req.body.username;

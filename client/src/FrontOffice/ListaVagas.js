@@ -41,9 +41,7 @@ class ListaVagas extends Component{
                 data: curVaga.createdAt.substring(0,curVaga.createdAt.indexOf('T'))
             };
             auxArray.push(vaga);
-            
-            if(areasSet.indexOf(vaga.area) === -1)
-                areasSet.push(vaga.area);
+
             if(localizacoesSet.indexOf(vaga.localizacao) === -1)
                 localizacoesSet.push(vaga.localizacao);
         }
@@ -51,8 +49,10 @@ class ListaVagas extends Component{
         let areasAux = [];
         let localizacoesAux = [];
 
-        for(let i = 0; i < areasSet.length; i++)
-            areasAux.push({nome: areasSet[i], id: i});
+        let responseAreas = await axios.get('http://localhost:8000/api/areas')
+        for(let i = 0; i < responseAreas.data.length; i++)
+            areasAux.push({nome: responseAreas.data[i].name, id: i})
+
         for(let i = 0; i < localizacoesSet.length; i++)
             localizacoesAux.push({nome: localizacoesSet[i], id: i});
 
@@ -82,7 +82,10 @@ class ListaVagas extends Component{
                     <img src="https://cdn.pixabay.com/photo/2018/06/22/03/42/agreement-3489902_960_720.jpg"/>
                     <h3>Junta-te a nós!</h3>
                 </div>
-                <a id="LinkAdminVagas" href="/backOffice/jobs">Administrar Vagas</a>
+                {
+                    (sessionStorage.getItem('token') != null) &&
+                     <a id="LinkAdminVagas" href="/backOffice/jobs">Administrar Vagas</a>
+                }
                 <div id="DropdownMenuContainer">
                     <DropdownAPI nome="Área" list={this.state.areas}/>
                     <DropdownAPI nome="Localização" list={this.state.localizacoes} />

@@ -1,27 +1,27 @@
-import React, { Component }  from 'react';
+import React, { Component } from 'react';
 import BackOffice_Vaga from './BackOffice_Vaga'
 import axios from 'axios'
 import uuid from 'uuid/v4'
 import RemovePopup from './RemovePopup'
+import jwt from 'jsonwebtoken';
 
-class VagasIndex extends Component{
-    constructor(props){
+class VagasIndex extends Component {
+    constructor(props) {
         super(props);
-        this.state={
-            vagas:[],
-            isShowingRemovePopup:false,
-            vagaToRemove:{}
+        this.state = {
+            vagas: [],
+            isShowingRemovePopup: false,
+            vagaToRemove: {}
         }
         this.removerVaga = this.removerVaga.bind(this);
         this.cancelarRemocaoVaga = this.cancelarRemocaoVaga.bind(this);
         this.removerVagaConfirmed = this.removerVagaConfirmed.bind(this);
     }
-    async componentDidMount(){
+    async componentDidMount() {
         let response = await axios.get('http://localhost:8000/api/jobs/');
         let auxArray = [...this.state.vagas];
-        
-        for(let i = 0; i < response.data.length; i++)
-        {
+
+        for (let i = 0; i < response.data.length; i++) {
             let curVaga = response.data[i];
             let responseLocalizacao = await axios.get(`http://localhost:8000/api/location/${curVaga.location}`);
             let vaga = {
@@ -29,7 +29,7 @@ class VagasIndex extends Component{
                 localizacao: responseLocalizacao.data[0].name,
                 id: curVaga.id,
                 descricao: curVaga.candidateDescript,
-                data: curVaga.createdAt.substring(0,curVaga.createdAt.indexOf('T')),
+                data: curVaga.createdAt.substring(0, curVaga.createdAt.indexOf('T')),
                 uuid: uuid()
             };
             auxArray.push(vaga);
@@ -37,69 +37,77 @@ class VagasIndex extends Component{
         this.setState({
             vagas: auxArray
         });
+
+        //testeeeeeeeeeee
+
+        this.testeToken();
     }
-    stringToArray(str){
+    testeToken() {
+        try {
+            var decoded = jwt.decode(sessionStorage.getItem('token'));
+            console.log(decoded.username);
+        } catch{
+            window.location = "/login";
+        }
+    }
+    stringToArray(str) {
         let ar = str.split(";");
         ar.pop();
         return ar;
     }
-    removerVaga(uuid){
+    removerVaga(uuid) {
 
         console.log('prompt de remoção')
         let vaga;
         let aux = [...this.state.vagas];
-        for(let i = 0; i < aux.length; i++){
-            if(aux[i].uuid === uuid)
-            {
+        for (let i = 0; i < aux.length; i++) {
+            if (aux[i].uuid === uuid) {
                 vaga = aux[i];
                 break;
             }
         }
-        if(vaga !== null)
-        {
+        if (vaga !== null) {
             this.setState({
-                vagaToRemove:vaga,
-                isShowingRemovePopup:true
+                vagaToRemove: vaga,
+                isShowingRemovePopup: true
             });
         }
     }
-    cancelarRemocaoVaga(){
+    cancelarRemocaoVaga() {
         console.log('cancela remoção de vaga')
         this.setState({
-            vagaToRemove:{},
-            isShowingRemovePopup:false
+            vagaToRemove: {},
+            isShowingRemovePopup: false
         });
     }
-    async removerVagaConfirmed(uuid){
+    async removerVagaConfirmed(uuid) {
         console.log('remover vaga')
         let vaga;
         let aux = [...this.state.vagas];
-        for(let i = 0; i < aux.length; i++){
-            if(aux[i].uuid === uuid)
-            {
+        for (let i = 0; i < aux.length; i++) {
+            if (aux[i].uuid === uuid) {
                 vaga = aux[i];
                 break;
             }
         }
 
-        if(vaga !== null)
-        {
+        if (vaga !== null) {
             await axios.delete(`http://localhost:8000/api/jobs/delete/${vaga.id}`);
             aux.filter(v => v !== vaga);
             this.setState({
                 vagas: aux
             });
             this.setState({
-                isShowingRemovePopup:false
+                isShowingRemovePopup: false
             })
         }
     }
-    render(){
-        return(
+    render() {
+        return (
             <div className="BackOffice_ListaVagas">
-                {this.state.vagas.map(v => 
-                    <BackOffice_Vaga 
-                        area={v.area} 
+                {this.state.vagas.map(v =>
+                    <BackOffice_Vaga
+                        area={v.area}
                         localizacao={v.localizacao}
                         descricao={this.stringToArray(v.descricao)}
                         data={v.data}
@@ -109,13 +117,15 @@ class VagasIndex extends Component{
                     />
                 )}
                 {
-                    this.state.isShowingRemovePopup && 
-                    <RemovePopup 
-                        vaga={this.state.vagaToRemove} 
-                        removerVagaConfirmed={this.removerVagaConfirmed} 
+                    this.state.isShowingRemovePopup &&
+                    <RemovePopup
+                        vaga={this.state.vagaToRemove}
+                        removerVagaConfirmed={this.removerVagaConfirmed}
                         cancelarRemocaoVaga={this.cancelarRemocaoVaga} />
                 }
+                <h1>{sessionStorage.getItem('token').username}</h1>
             </div>
+
         );
     }
 }
