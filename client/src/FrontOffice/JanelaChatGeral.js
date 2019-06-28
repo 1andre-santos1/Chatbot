@@ -16,7 +16,7 @@ class JanelaChatGeral extends Component{
     }
     async componentDidMount(){
         let response = await axios.post(
-            '//localhost:8000/conversation',
+            '//localhost:8000/generalQuestions',
             {text:''}
         );
 
@@ -33,7 +33,7 @@ class JanelaChatGeral extends Component{
         this.adicionarMensagem(this.state.pergunta,"user");
 
         var response = await axios.post(
-            '//localhost:8000/conversation',
+            '//localhost:8000/generalQuestions',
              {text:this.state.pergunta}
         );
 
@@ -47,18 +47,38 @@ class JanelaChatGeral extends Component{
         while( curMatch = rxp.exec( str ) ) {
             apiRequests.push( curMatch[1] );
         }
-
         for(let i = 0; i < apiRequests.length; i++){
+            
+            if(apiRequests[i].includes(':idLocal/:idArea')){
+                let localValue = response.data.entities[0].value;
+                let areaValue = response.data.entities[1].value;
 
-            if(apiRequests[i].includes(",count"))
-            {
-                apiRequests[i] = apiRequests[i].replace(",count","");
+                let localResponse = await axios.get('http://localhost:8000/api/locations');
+                let localId;
+                for(let j = 0; j < localResponse.data.length; j++)
+                {
+                    if(localResponse.data[j].name === localValue)
+                    {
+                        localId = localResponse.data[j].id;
+                        let strAux = '' + localId;
+                        apiRequests[i] = apiRequests[i].replace(':idLocal',strAux);
+                        break;
+                    }
+                }
+                let areaResponse = await axios.get('http://localhost:8000/api/areas');
+                let areaId;
+                for(let j = 0; j < areaResponse.data.length; j++)
+                {
+                    if(areaResponse.data[j].name === areaValue)
+                    {
+                        areaId = areaResponse.data[j].id;
+                        let strAux = ''+areaId;
+                        apiRequests[i] = apiRequests[i].replace(':idArea',strAux);
+                        break;
+                    }
+                }
 
-                let apiResponse = await axios.get(`http://localhost:8000${apiRequests[i]}`);
-
-                watsonResponse = watsonResponse.replace("{"+apiRequests[i]+",count}",apiResponse.data.length);
-            }
-            else{
+                //pedido a localhost:8000/api/jobs/:idLocal/:idArea
                 let apiResponse = await axios.get(`http://localhost:8000${apiRequests[i]}`);
 
                 let values = [];
@@ -73,6 +93,34 @@ class JanelaChatGeral extends Component{
                         strAux += ', '
                 }
 
+                watsonResponse = watsonResponse.replace("{/api/jobs/:idLocal/:idArea}", strAux);
+            }
+
+            else if(apiRequests[i].includes(",count"))
+            {
+                apiRequests[i] = apiRequests[i].replace(",count","");
+
+                let apiResponse = await axios.get(`http://localhost:8000${apiRequests[i]}`);
+
+                watsonResponse = watsonResponse.replace("{"+apiRequests[i]+",count}",apiResponse.data.length);
+            }
+            else{
+                let apiResponse = await axios.get(`http://localhost:8000${apiRequests[i]}`);
+
+
+                let values = [];
+                for(let j = 0; j < apiResponse.data.length; j++){
+                    values.push(apiResponse.data[j].name);
+                }
+
+                let strAux = '';
+                for(let j = 0; j < values.length; j++){
+                    strAux += values[j];
+                    if(j < values.length -1)
+                        strAux += ', '
+                }
+
+                console.log(watsonResponse)
                 watsonResponse = watsonResponse.replace("{"+apiRequests[i]+"}", strAux);
             }
         }   

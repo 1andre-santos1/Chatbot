@@ -16,7 +16,7 @@ class JanelaChatVaga extends Component{
     }
     async componentDidMount(){
         let response = await axios.post(
-            '//localhost:8000/conversation',
+            '//localhost:8000/specificQuestions',
             {text:''}
         );
 
@@ -33,7 +33,7 @@ class JanelaChatVaga extends Component{
         this.adicionarMensagem(this.state.pergunta,"user");
 
         var response = await axios.post(
-            '//localhost:8000/conversation',
+            '//localhost:8000/specificQuestions',
              {text:this.state.pergunta}
         );
 
@@ -55,7 +55,6 @@ class JanelaChatVaga extends Component{
             //se estiver a ser pedido apenas o name da vaga
             if(responseArray.length === 1){
                 let apiResponse = await axios.get(`http://localhost:8000${responseArray[i]}//${this.props.id}`);
-
                 let values = [];
                 for(let j = 0; j < apiResponse.data.length; j++){
                     values.push(apiResponse.data[j].name);
@@ -95,7 +94,9 @@ class JanelaChatVaga extends Component{
                 }
             }
         }   
-
+        
+        watsonResponse = watsonResponse.replace(/\"/g, "")
+        
         this.adicionarMensagem(watsonResponse,"chatbot");
 
         this.setState({
