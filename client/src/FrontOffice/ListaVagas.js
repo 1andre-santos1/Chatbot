@@ -18,9 +18,12 @@ class ListaVagas extends Component{
             isShowingChatGeral: false,
             chatGeralIconClassName: 'rotate-in-center',
             areas: [],
-            localizacoes: []
+            localizacoes: [],
+            areaFiltered: 'Tudo',
+            localFiltered: 'Tudo'
         }
         this.handleShowChatGeral = this.handleShowChatGeral.bind(this);
+        this.filterJobs = this.filterJobs.bind(this);
     }
     async componentDidMount(){
         let APIURL = "http://localhost:8000/api/jobs/";
@@ -74,10 +77,21 @@ class ListaVagas extends Component{
             chatGeralIconClassName: newClassName
         });
     }
-    
+    filterJobs(filterBy,filterByValue){
+        if(filterBy === 'Área'){
+            this.setState({
+                areaFiltered: filterByValue
+            });
+        }
+        else if(filterBy === 'Localização'){
+            this.setState({
+                localFiltered: filterByValue
+            })
+        }       
+    }
     render(){
         return(
-            <div>
+            <div className="ListaVagas">
                 <div class="PageBanner">
                     <img src="https://cdn.pixabay.com/photo/2018/06/22/03/42/agreement-3489902_960_720.jpg"/>
                     <h3>Junta-te a nós!</h3>
@@ -87,21 +101,30 @@ class ListaVagas extends Component{
                      <a id="LinkAdminVagas" href="/backOffice/jobs">Administrar Vagas</a>
                 }
                 <div id="DropdownMenuContainer">
-                    <DropdownAPI nome="Área" list={this.state.areas}/>
-                    <DropdownAPI nome="Localização" list={this.state.localizacoes} />
+                    <DropdownAPI nome="Área" list={this.state.areas} filterJobs={this.filterJobs}/>
+                    <DropdownAPI nome="Localização" list={this.state.localizacoes} filterJobs={this.filterJobs}/>
                 </div>
                 <div id="VagasContainer">
                     <hr />
                     <Accordion>
-                        {this.state.vagas.map((v,index) => (
-                            <Vaga 
-                                area={v.area} 
-                                localizacao={v.localizacao}
-                                descricao={this.stringToArray(v.descricao)}
-                                data={v.data}
-                                id={index}
-                            />
-                        ))}
+                        {
+                            this.state.vagas.map(function(v,index){
+                                return( 
+                                    (
+                                        (v.area === this.state.areaFiltered) || (this.state.areaFiltered === 'Tudo') &&
+                                        (v.localizacao === this.state.localFiltered) || (this.state.localFiltered === 'Tudo')
+                                    )
+                                    &&
+                                    <Vaga 
+                                        area={v.area} 
+                                        localizacao={v.localizacao}
+                                        descricao={this.stringToArray(v.descricao)}
+                                        data={v.data}
+                                        id={index}
+                                    />
+                                );
+                            },this)
+                        }
                     </Accordion>
                 </div>
                 <div onClick={this.handleShowChatGeral} id="chatbotIcon">
