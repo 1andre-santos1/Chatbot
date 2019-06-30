@@ -43,6 +43,10 @@ class ListaVagas extends Component{
                 descricao: curVaga.candidateDescript,
                 data: curVaga.createdAt.substring(0,curVaga.createdAt.indexOf('T'))
             };
+
+            let responseMainArea = await axios.get(`http://localhost:8000/api/areas/${curVaga.area}`);
+            vaga.mainArea = responseMainArea.data[0].name;
+
             auxArray.push(vaga);
 
             if(localizacoesSet.indexOf(vaga.localizacao) === -1)
@@ -111,8 +115,8 @@ class ListaVagas extends Component{
                             this.state.vagas.map(function(v,index){
                                 return( 
                                     (
-                                        (v.area === this.state.areaFiltered) || (this.state.areaFiltered === 'Tudo') &&
-                                        (v.localizacao === this.state.localFiltered) || (this.state.localFiltered === 'Tudo')
+                                        ((v.mainArea === this.state.areaFiltered) || (this.state.areaFiltered === 'Tudo')) &&
+                                        ((v.localizacao === this.state.localFiltered) || (this.state.localFiltered === 'Tudo'))
                                     )
                                     &&
                                     <Vaga 
