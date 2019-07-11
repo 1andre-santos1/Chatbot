@@ -4,6 +4,7 @@ import axios from 'axios'
 import uuid from 'uuid/v4'
 import RemovePopup from './RemovePopup'
 import jwt from 'jsonwebtoken';
+import EditPopup from './EditPopup';
 
 class VagasIndex extends Component {
     constructor(props) {
@@ -11,11 +12,16 @@ class VagasIndex extends Component {
         this.state = {
             vagas: [],
             isShowingRemovePopup: false,
-            vagaToRemove: {}
+            isShowingEditPopup: false,
+            vagaToRemove: {},
+            vagaToEdit: {}
         }
         this.removerVaga = this.removerVaga.bind(this);
         this.cancelarRemocaoVaga = this.cancelarRemocaoVaga.bind(this);
         this.removerVagaConfirmed = this.removerVagaConfirmed.bind(this);
+        this.editarVaga = this.editarVaga.bind(this);
+        this.editarVagaConfirmed = this.editarVagaConfirmed.bind(this);
+        this.cancelarEdicaoVaga = this.cancelarEdicaoVaga.bind(this);
     }
     componentDidMount() {
         
@@ -33,6 +39,10 @@ class VagasIndex extends Component {
             let vaga = {
                 area: curVaga.name,
                 localizacao: responseLocalizacao.data[0].name,
+                remote: curVaga.remote,
+                travelOtCountrys: curVaga.travelOtCountrys,
+                shifts: curVaga.shifts,
+                formation: curVaga.formation,
                 id: curVaga.id,
                 descricao: curVaga.candidateDescript,
                 data: curVaga.createdAt.substring(0, curVaga.createdAt.indexOf('T')),
@@ -74,11 +84,33 @@ class VagasIndex extends Component {
             });
         }
     }
+    editarVaga(uuid){
+        let vaga;
+        let aux = [...this.state.vagas];
+        for (let i = 0; i < aux.length; i++) {
+            if (aux[i].uuid === uuid) {
+                vaga = aux[i];
+                break;
+            }
+        }
+        if(vaga !== null){
+            this.setState({
+                vagaToEdit: vaga,
+                isShowingEditPopup:true
+            })
+        }
+
+    }
     cancelarRemocaoVaga() {
-        console.log('cancela remoção de vaga')
         this.setState({
             vagaToRemove: {},
             isShowingRemovePopup: false
+        });
+    }
+    cancelarEdicaoVaga(){
+        this.setState({
+            vagaToEdit: {},
+            isShowingEditPopup: false
         });
     }
     async removerVagaConfirmed(uuid) {
@@ -103,6 +135,29 @@ class VagasIndex extends Component {
         }
         this.fetchVagas();
     }
+    async editarVagaConfirmed(uuid,vagaEditadaObj){
+        let vaga;
+        let aux = [...this.state.vagas];
+        for (let i = 0; i < aux.length; i++) {
+            if (aux[i].uuid === uuid) {
+                vaga = aux[i];
+                break;
+            }
+        }
+
+        if(vaga !== null){
+            await axios.put(`http://localhost:8000/api/jobs/update/${vaga.id}`,vagaEditadaObj);
+            
+
+            this.setState({
+                isShowingEditPopup: false,
+                vagaToEdit: {}
+            });
+
+            this.fetchVagas();
+        }
+    }
+    
     render() {
         return (
             <div className="BackOffice_ListaVagas">
@@ -115,6 +170,7 @@ class VagasIndex extends Component {
                         id={v.id}
                         uuid={v.uuid}
                         removerVaga={this.removerVaga}
+                        editarVaga={this.editarVaga}
                     />
                 )}
                 {
@@ -123,6 +179,14 @@ class VagasIndex extends Component {
                         vaga={this.state.vagaToRemove}
                         removerVagaConfirmed={this.removerVagaConfirmed}
                         cancelarRemocaoVaga={this.cancelarRemocaoVaga} />
+                }
+                {
+                    this.state.isShowingEditPopup &&
+                    <EditPopup 
+                        vaga={this.state.vagaToEdit}
+                        editarVagaConfirmed={this.editarVagaConfirmed}
+                        cancelarEdicaoVaga={this.cancelarEdicaoVaga}
+                        />
                 }
                 <h1>{sessionStorage.getItem('token').username}</h1>
             </div>

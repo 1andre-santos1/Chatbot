@@ -5,9 +5,13 @@ class BackOffice_Vaga extends Component{
     constructor(props){
         super(props);
         this.handleRemove = this.handleRemove.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
     }
     handleRemove(){
         this.props.removerVaga(this.props.uuid);
+    }
+    handleEdit(){
+        this.props.editarVaga(this.props.uuid);
     }
     render(){
         return(
@@ -24,7 +28,7 @@ class BackOffice_Vaga extends Component{
                     {this.props.descricao.map(d => <li className="BackOffice_Vaga-Descricao-Item">{d}</li>)}
                 </ul>
                 <span className="BackOffice_Vaga-Data">{this.props.data}</span>
-                <button className="BackOffice_Vaga-BtnEditar">Editar</button>
+                <button className="BackOffice_Vaga-BtnEditar" onClick={this.handleEdit}>Editar</button>
                 <button className="BackOffice_Vaga-BtnRemover" onClick={this.handleRemove}>Remover</button>
             </div>
         );
