@@ -12,7 +12,6 @@ class EditPopup extends Component{
         this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
     }
     componentDidMount(){
-        console.log(this.props.vaga)
         this.setState({
             inputVaga: this.props.vaga
         });
@@ -75,8 +74,8 @@ class EditPopup extends Component{
                 <span>Sim</span><input type="radio" name="shifts" checked={this.state.inputVaga.shifts} onClick={this.handleRadioChange}></input>
                 <span>Não</span><input type="radio" name="shifts" checked={!this.state.inputVaga.shifts} onClick={this.handleRadioChange}></input>
 
-                <button onClick={this.handleConfirmarEdicao}>Confirmar Edição</button>
-                <button onClick={this.handleCancelarEdicao}>Cancelar Edição</button>
+                <button onClick={this.handleConfirmarEdicao}>Confirmar</button>
+                <button onClick={this.handleCancelarEdicao}>Cancelar</button>
             </div>
         );
     }

@@ -5,6 +5,7 @@ import uuid from 'uuid/v4'
 import RemovePopup from './RemovePopup'
 import jwt from 'jsonwebtoken';
 import EditPopup from './EditPopup';
+import AddPopup from './AddPopup';
 
 class VagasIndex extends Component {
     constructor(props) {
@@ -14,7 +15,8 @@ class VagasIndex extends Component {
             isShowingRemovePopup: false,
             isShowingEditPopup: false,
             vagaToRemove: {},
-            vagaToEdit: {}
+            vagaToEdit: {},
+            isShowingAddPopup: false
         }
         this.removerVaga = this.removerVaga.bind(this);
         this.cancelarRemocaoVaga = this.cancelarRemocaoVaga.bind(this);
@@ -22,6 +24,8 @@ class VagasIndex extends Component {
         this.editarVaga = this.editarVaga.bind(this);
         this.editarVagaConfirmed = this.editarVagaConfirmed.bind(this);
         this.cancelarEdicaoVaga = this.cancelarEdicaoVaga.bind(this);
+        this.adicionarVagaConfirmed = this.adicionarVagaConfirmed.bind(this);
+        this.handleAddVaga = this.handleAddVaga.bind(this);
     }
     componentDidMount() {
         
@@ -157,10 +161,28 @@ class VagasIndex extends Component {
             this.fetchVagas();
         }
     }
-    
+    async adicionarVagaConfirmed(vaga){
+        
+        if(vaga != null){
+            vaga.location=1;
+            vaga.area=2;
+            await axios.post("http://localhost:8000/api/jobs/new",vaga);
+        }
+
+        this.setState({
+            isShowingAddPopup: false
+        });
+        this.fetchVagas();
+    }
+    handleAddVaga(){
+        this.setState({
+            isShowingAddPopup: true
+        })
+    }
     render() {
         return (
             <div className="BackOffice_ListaVagas">
+                <button onClick={this.handleAddVaga}>Adicionar Vaga</button>
                 {this.state.vagas.map(v =>
                     <BackOffice_Vaga
                         area={v.area}
@@ -187,6 +209,12 @@ class VagasIndex extends Component {
                         editarVagaConfirmed={this.editarVagaConfirmed}
                         cancelarEdicaoVaga={this.cancelarEdicaoVaga}
                         />
+                }
+                {
+                    this.state.isShowingAddPopup &&
+                    <AddPopup
+                        adicionarVagaConfirmed={this.adicionarVagaConfirmed}
+                        cancelarAdicaoVaga={this.cancelarEdicaoVaga} />
                 }
                 <h1>{sessionStorage.getItem('token').username}</h1>
             </div>
