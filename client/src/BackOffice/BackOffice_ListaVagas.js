@@ -17,9 +17,15 @@ class VagasIndex extends Component {
         this.cancelarRemocaoVaga = this.cancelarRemocaoVaga.bind(this);
         this.removerVagaConfirmed = this.removerVagaConfirmed.bind(this);
     }
-    async componentDidMount() {
+    componentDidMount() {
+        
+        this.fetchVagas();
+
+        this.testeToken();
+    }
+    async fetchVagas(){
         let response = await axios.get('http://localhost:8000/api/jobs/');
-        let auxArray = [...this.state.vagas];
+        let auxArray = [];
 
         for (let i = 0; i < response.data.length; i++) {
             let curVaga = response.data[i];
@@ -37,10 +43,6 @@ class VagasIndex extends Component {
         this.setState({
             vagas: auxArray
         });
-
-        //testeeeeeeeeeee
-
-        this.testeToken();
     }
     testeToken() {
         try {
@@ -57,7 +59,6 @@ class VagasIndex extends Component {
     }
     removerVaga(uuid) {
 
-        console.log('prompt de remoção')
         let vaga;
         let aux = [...this.state.vagas];
         for (let i = 0; i < aux.length; i++) {
@@ -81,7 +82,6 @@ class VagasIndex extends Component {
         });
     }
     async removerVagaConfirmed(uuid) {
-        console.log('remover vaga')
         let vaga;
         let aux = [...this.state.vagas];
         for (let i = 0; i < aux.length; i++) {
@@ -101,6 +101,7 @@ class VagasIndex extends Component {
                 isShowingRemovePopup: false
             })
         }
+        this.fetchVagas();
     }
     render() {
         return (
@@ -125,7 +126,6 @@ class VagasIndex extends Component {
                 }
                 <h1>{sessionStorage.getItem('token').username}</h1>
             </div>
-
         );
     }
 }

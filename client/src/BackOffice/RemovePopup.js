@@ -7,11 +7,9 @@ class RemovePopup extends Component{
         this.handleConfirmarRemocao = this.handleConfirmarRemocao.bind(this);
     }
     handleCancelarRemocao(){
-        console.log('handle cancelar remoção')
         this.props.cancelarRemocaoVaga();
     }
     handleConfirmarRemocao(){
-        console.log('handle confirmar remoção')
         this.props.removerVagaConfirmed(this.props.vaga.uuid);
     }
     render(){
