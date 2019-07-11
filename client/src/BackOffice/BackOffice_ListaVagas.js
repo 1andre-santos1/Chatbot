@@ -162,11 +162,58 @@ class VagasIndex extends Component {
         }
     }
     async adicionarVagaConfirmed(vaga){
-        
         if(vaga != null){
-            vaga.location=1;
-            vaga.area=2;
-            await axios.post("http://localhost:8000/api/jobs/new",vaga);
+            let locationText = vaga.location;
+            let areaText = vaga.area;
+            let areaId = -1;
+            let locationId = -1;
+    
+            let responseLocations = await axios.get('http://localhost:8000/api/locations');
+            for(let i = 0; i < responseLocations.data.length; i++){
+                let obj = responseLocations.data[i];
+                if(obj.name.toLowerCase() === locationText.toLowerCase())
+                {
+                    locationId = obj.id;
+                    break;
+                }
+            }
+            if(locationId === -1){
+                let locationAux = locationText.toLowerCase();
+                locationAux = locationAux.charAt(0).toUpperCase() + locationAux.slice(1);
+                let res = await axios.post('http://localhost:8000/api/location/new',{
+                    name: locationAux
+                });
+                locationId = res.data.id;
+            }
+    
+            let responseAreas = await axios.get('http://localhost:8000/api/areas');
+            for(let i = 0; i < responseAreas.data.length; i++){
+                let obj = responseAreas.data[i];
+                if(obj.name.toLowerCase() === areaText.toLowerCase())
+                {
+                    areaId = obj.id;
+                    break;
+                }
+            }
+            if(areaId === -1){
+                let areaAux = areaText.toLowerCase();
+                areaAux = areaAux.charAt(0).toUpperCase() + areaAux.slice(1);
+                let res = await axios.post('http://localhost:8000/api/areas/new',{
+                    name: areaAux
+                });
+                areaId = res.data.id;
+            }
+
+            await axios.post("http://localhost:8000/api/jobs/new",{
+                name: vaga.name,
+                candidateDescript: vaga.candidateDescript,
+                remote: vaga.remote,
+                formation: vaga.formation,
+                travelOtCountrys: vaga.travelOtCountrys,
+                shifts: vaga.shifts,
+                location: locationId,
+                area: areaId
+            });
         }
 
         this.setState({

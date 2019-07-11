@@ -88,7 +88,7 @@ module.exports = function (app, db) {
      */
     app.post('/api/location/new', function (req, res) {
         db.Locations.create({
-            name: req.body.nome,
+            name: req.body.name,
         }).then(function (results) {
             res.json(results);
         })
