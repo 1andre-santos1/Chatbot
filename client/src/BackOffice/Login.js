@@ -26,7 +26,7 @@ class Login extends Component {
             password: this.state.password
         };
 
-        let response = await axios.post("//localhost:8000/login", loginData, {
+        let response = await axios.post("https://asaf-enterprise-chatbot-api.herokuapp.com/login", loginData, {
             headers: {
                 "Content-Type": "application/json"
             },

@@ -26,7 +26,7 @@ class ListaVagas extends Component{
         this.filterJobs = this.filterJobs.bind(this);
     }
     async componentDidMount(){
-        let APIURL = "http://localhost:8000/api/jobs/";
+        let APIURL = "https://asaf-enterprise-chatbot-api.herokuapp.com/api/jobs/";
         let response = await axios.get(APIURL);
         let auxArray = [...this.state.vagas];
 
@@ -36,7 +36,7 @@ class ListaVagas extends Component{
         for(let i = 0; i < response.data.length; i++)
         {
             let curVaga = response.data[i];
-            let responseLocalizacao = await axios.get(`http://localhost:8000/api/location/${curVaga.location}`);
+            let responseLocalizacao = await axios.get(`https://asaf-enterprise-chatbot-api.herokuapp.com/api/location/${curVaga.location}`);
             let vaga = {
                 area: curVaga.name,
                 localizacao: responseLocalizacao.data[0].name,
@@ -44,7 +44,7 @@ class ListaVagas extends Component{
                 data: curVaga.createdAt.substring(0,curVaga.createdAt.indexOf('T'))
             };
 
-            let responseMainArea = await axios.get(`http://localhost:8000/api/areas/${curVaga.area}`);
+            let responseMainArea = await axios.get(`https://asaf-enterprise-chatbot-api.herokuapp.com/api/areas/${curVaga.area}`);
             vaga.mainArea = responseMainArea.data[0].name;
 
             auxArray.push(vaga);
@@ -56,7 +56,7 @@ class ListaVagas extends Component{
         let areasAux = [];
         let localizacoesAux = [];
 
-        let responseAreas = await axios.get('http://localhost:8000/api/areas')
+        let responseAreas = await axios.get('https://asaf-enterprise-chatbot-api.herokuapp.com/api/areas')
         for(let i = 0; i < responseAreas.data.length; i++)
             areasAux.push({nome: responseAreas.data[i].name, id: i})
 

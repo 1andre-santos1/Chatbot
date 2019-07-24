@@ -34,12 +34,12 @@ class VagasIndex extends Component {
         this.testeToken();
     }
     async fetchVagas(){
-        let response = await axios.get('http://localhost:8000/api/jobs/');
+        let response = await axios.get('https://asaf-enterprise-chatbot-api.herokuapp.com/api/jobs/');
         let auxArray = [];
 
         for (let i = 0; i < response.data.length; i++) {
             let curVaga = response.data[i];
-            let responseLocalizacao = await axios.get(`http://localhost:8000/api/location/${curVaga.location}`);
+            let responseLocalizacao = await axios.get(`https://asaf-enterprise-chatbot-api.herokuapp.com/api/location/${curVaga.location}`);
             let vaga = {
                 area: curVaga.name,
                 localizacao: responseLocalizacao.data[0].name,
@@ -128,7 +128,7 @@ class VagasIndex extends Component {
         }
 
         if (vaga !== null) {
-            await axios.delete(`http://localhost:8000/api/jobs/delete/${vaga.id}`);
+            await axios.delete(`https://asaf-enterprise-chatbot-api.herokuapp.com/api/jobs/delete/${vaga.id}`);
             aux.filter(v => v !== vaga);
             this.setState({
                 vagas: aux
@@ -150,7 +150,7 @@ class VagasIndex extends Component {
         }
 
         if(vaga !== null){
-            await axios.put(`http://localhost:8000/api/jobs/update/${vaga.id}`,vagaEditadaObj);
+            await axios.put(`https://asaf-enterprise-chatbot-api.herokuapp.com/api/jobs/update/${vaga.id}`,vagaEditadaObj);
             
 
             this.setState({
@@ -168,7 +168,7 @@ class VagasIndex extends Component {
             let areaId = -1;
             let locationId = -1;
     
-            let responseLocations = await axios.get('http://localhost:8000/api/locations');
+            let responseLocations = await axios.get('https://asaf-enterprise-chatbot-api.herokuapp.com/api/locations');
             for(let i = 0; i < responseLocations.data.length; i++){
                 let obj = responseLocations.data[i];
                 if(obj.name.toLowerCase() === locationText.toLowerCase())
@@ -180,13 +180,13 @@ class VagasIndex extends Component {
             if(locationId === -1){
                 let locationAux = locationText.toLowerCase();
                 locationAux = locationAux.charAt(0).toUpperCase() + locationAux.slice(1);
-                let res = await axios.post('http://localhost:8000/api/location/new',{
+                let res = await axios.post('https://asaf-enterprise-chatbot-api.herokuapp.com/api/location/new',{
                     name: locationAux
                 });
                 locationId = res.data.id;
             }
     
-            let responseAreas = await axios.get('http://localhost:8000/api/areas');
+            let responseAreas = await axios.get('https://asaf-enterprise-chatbot-api.herokuapp.com/api/areas');
             for(let i = 0; i < responseAreas.data.length; i++){
                 let obj = responseAreas.data[i];
                 if(obj.name.toLowerCase() === areaText.toLowerCase())
@@ -198,13 +198,13 @@ class VagasIndex extends Component {
             if(areaId === -1){
                 let areaAux = areaText.toLowerCase();
                 areaAux = areaAux.charAt(0).toUpperCase() + areaAux.slice(1);
-                let res = await axios.post('http://localhost:8000/api/areas/new',{
+                let res = await axios.post('https://asaf-enterprise-chatbot-api.herokuapp.com/api/areas/new',{
                     name: areaAux
                 });
                 areaId = res.data.id;
             }
 
-            await axios.post("http://localhost:8000/api/jobs/new",{
+            await axios.post("https://asaf-enterprise-chatbot-api.herokuapp.com/api/jobs/new",{
                 name: vaga.name,
                 candidateDescript: vaga.candidateDescript,
                 remote: vaga.remote,
